@@ -1,34 +1,32 @@
 body
 {
-    display: flex;
-    align-items: center;
     margin: 0;
-    background-color: #95b5cf;
-    flex-direction: column;
-    overflow-x: hidden;
+    background-color: white;
+    overflow: hidden;
     color: black;
+    display: flex;
 }
 
 nav
 {
-    background-color: #4b6c93;
-    padding: 26px;
+    background-color: #156082;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    width: 100%;
+    width: 30%;
     color: white;
+    position: absolute;
+    height: 100%;
 }
 
 nav ul
 {
     margin: 0;
     padding: 0;
-    display: flex;
     justify-content: center;
 }
 
 nav li, nav a
 {
-    display: inline-block;
+    display: block;
 }
 
 nav a
@@ -40,6 +38,7 @@ nav a
     transition: transform 500ms;
     color: white;
     padding: 8px;
+    margin: 0px 0px 0px 40px;
 }
 
 nav a:hover:not(.active)
@@ -50,6 +49,12 @@ nav a:hover:not(.active)
 nav li.active a:hover
 {
     transform: none;
+    text-decoration: none;
+    color:white;
+}
+nav a:focus {
+    color: white;
+    text-decoration: none;
 }
 
 nav a.active
@@ -61,4 +66,75 @@ nav li.active
 {
     background-color: rgba(196, 196, 196, 0.37);
     border-radius: 8px;
+}
+
+.contentWrapper{
+    width:70%;
+    text-align: center;
+    position: absolute;
+    right: 0;
+}
+
+.contentWrapper h1
+{
+    padding:40px;
+}
+.interactiveBoxesDiv
+{
+    width: 60%;
+    margin:auto;
+    padding: 40px;
+
+}
+.exerciseBox
+{
+    background-color: #156082;
+    height: 4em;
+    margin: 2px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center; /* Align horizontal */
+    align-items: center; /* Align vertical */
+    width: 100%;
+
+}
+
+.exerciseText
+{
+    color: white;
+    font-size: 2em;
+    text-align: center;
+}
+
+#addExerciseBox
+{
+    background-color: white;
+    border: #156082 solid;
+    margin: 2px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center; /* Align horizontal */
+    align-items: center; /* Align vertical */
+    color:#156082;
+    font-size: 2em;
+    text-align: center;
+    width:90%;
+}
+
+.exerciseDiv
+{
+    display:flex;
+}
+
+.exerciseDiv span
+{
+    padding: 20px;
+    color:#156082;
+    width:10%;
+}
+
+.editPageDiv
+{
+    display:block;
+    
 }
