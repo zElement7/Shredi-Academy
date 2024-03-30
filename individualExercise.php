@@ -1,5 +1,8 @@
 <?php
-//require_once './DataBaseConnection.php';
+session_start();
+require_once "./includes/DataBaseConnection.php";
+
+$returnPage = $_SESSION['lastPage'];
 
 if (isset($_POST['exerciseId'])) {
    // $exerciseId = cleanInputValue($conndb, $_POST['exerciseId']);
@@ -10,15 +13,16 @@ if (isset($_POST['exerciseId'])) {
 
 
 //use exercise id to select the exercise from the database
-$sqlQuery = "SELECT sets, reps, name FROM exercises WHERE id = {$exerciseId}"; //not real query
-//$result = $conndb->query($sql);
-//$row = $result->fetch_assoc();
-//$numberOfSets = $row['sets'];
+$sqlQuery = "SELECT sets, reps, weight, name FROM exercises WHERE id = {$exerciseId}"; //not real query
+$result = $conndb->query($sqlQuery);
 
-$exerciseName = "Shoulder Press";
-$numberOfSets = 3;
-$numberOfReps = 10;
-$weightLifted = 70;
+if (mysqli_num_rows($result) > 0) {
+            list($numberOfSets, $numberOfReps, $weightLifted, $exerciseName) = mysqli_fetch_row($result);
+}
+else{
+    echo "Error Getting Exercise Information";
+}
+
 ?>
 
 <!doctype html>
@@ -34,7 +38,7 @@ $weightLifted = 70;
     <body>
 <?php
 echo <<<HTML
-        <div class="editPageDiv">
+        <div class="editPageDiv container-fluid text-center w-100">
        <h1>{$exerciseName}</h1>
      <form method="post" action="editExercise.php">
      <label for="sets">Sets:</label>
@@ -45,16 +49,15 @@ echo <<<HTML
      <br>
      <label for="weight">Weight:</label>
      <input type="number" id="weight" name="weight" min="" max="" value={$weightLifted} />
+      <input type = "hidden" name ="id" value = "{$exerciseId}" />
+      <br>
       <button type = "Submit" value="Save" name="Save">Save</button>
-    
-     </form>
-      <button name = "Cancel" value="Cancel"><a href =./exercise.php>Cancel</a></button>
-    
+     <button name = "Cancel" value="Cancel"><a href =./{$returnPage}>Cancel</a></button>
+     </form
         </div>
-     
      HTML;
+     mysqli_close($conndb);
 ?>
-
     </body>
 </html>
 
