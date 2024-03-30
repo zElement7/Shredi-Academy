@@ -24,7 +24,7 @@ $success = $conndb->query($updateQuery);
     }
     
 mysqli_close($conndb);
-header('Location:{$returnPage}'); //redirect to exercise page
+header("Location:" . $returnPage); //redirect to exercise page
 
 
 

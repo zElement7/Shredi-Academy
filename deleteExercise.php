@@ -6,7 +6,7 @@ $toDelete = cleanInputValue($conndb, $_POST['toDelete']);
 
 echo "to delete " . $toDelete;
 
-$deleteQuery = "delete FROM exercises WHERE id=$toDelete";
+$deleteQuery = "Delete FROM exercises WHERE id=$toDelete";
 $success = $conndb->query($deleteQuery);
     
     if($success == false)

@@ -17,10 +17,12 @@ if (isset($_POST['sortAlphabetically'])) {
 
 //use sql query to list order of exercises
 if ($sortByName == "yes") {
-    $query = "SELECT name, id, custom_exercise, exercise_type FROM exercises order by name";
+    //$query = "SELECT name, id, custom_exercise, exercise_type FROM exercises order by name";
+    $query = "SELECT name, id, exercise_type FROM exercises order by name";
 } else {
 
-    $query = "SELECT name, id, custom_exercise, exercise_type FROM exercises order by custom_exercise, name";
+    //$query = "SELECT name, id, custom_exercise, exercise_type FROM exercises order by custom_exercise, name";
+    $query = "SELECT name, id, exercise_type FROM exercises order by custom_exercise, name";
 }
 
 
@@ -32,17 +34,14 @@ if (!$result) {
     die('Invalid query: ' . mysql_error($conndb));
 }
 
-function addExercise() {
-    
-}
+
 ?>
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Prototype</title>
-        <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css"> 
+        <title>Exercises</title>
+        
         <link rel="stylesheet" href="./css/style.css" type="text/css">
-
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -63,21 +62,21 @@ function addExercise() {
             </form>
 
             <div class="interactiveBoxesDiv">
-                <form>
-
+                <a style="text-decoration: none;" href ="addExercise.php">
                     <div id="addExerciseBox">Add Exercise</div>
-                </form>
+                </a>
+          
                 <?php
                 if ($result->num_rows <= 0) {
                     echo "no results";
                 }
 // output data of each row
                 while ($myExercises = $result->fetch_assoc()) {
-
+                    $myExercises['custom_exercise'] = true;
                     //if this is a custom exercise allow the user to delete it by adding a clickable trashcan
                     // icon.  If it is a default exercise do not allow this functionaility
                     if ($sortByName == "yes") {
-                        if ($myExercises['custom_exercise'] == 1) {
+                        if ($myExercises['custom_exercise'] == true) {
                             echo <<<HTML
                     <div class='exerciseDiv'>
                     <form method="post" action="individualExercise.php" style="width:100%;">
@@ -89,7 +88,7 @@ function addExercise() {
                          </form>
                          <form id="deleteForm" action="deleteExercise.php" method="post">
                             <input type="hidden" name="toDelete" value={$myExercises['id']}>
-                            <span onclick= "deleteExercise()" class='glyphicon glyphicon-trash'></span>     
+                            <button type="submit" class='glyphicon glyphicon-trash'></button>     
                                 </form>
                     <div>
                     HTML;
@@ -111,7 +110,7 @@ function addExercise() {
 
                         echo "</div></div>";
                     } else {
-                        if ($myExercises['custom_exercise'] == 1) {
+                        if ($myExercises['custom_exercise'] == true) {
                             echo <<<HTML
                     <div class='exerciseDiv'>
                     <form method="post" action="individualExercise.php" style="width:100%;">
@@ -124,7 +123,7 @@ function addExercise() {
                          </form>
                        <form id="deleteForm" action="deleteExercise.php" method="post">
                             <input type="hidden" name="toDelete" value={$myExercises['id']}>
-                            <span onclick= "deleteExercise()" class='glyphicon glyphicon-trash'></span>
+                            <button type="submit" class='glyphicon glyphicon-trash'></button>
                             </form>
                     <div>
                     HTML;

@@ -39,7 +39,7 @@ else{
     <body>
 <?php
 echo <<<HTML
-        <div class="editPageDiv">
+        <div class="editPageDiv container-fluid text-center w-100">
        <h1>{$exerciseName}</h1>
      <form method="post" action="editExercise.php">
      <label for="sets">Sets:</label>
@@ -51,11 +51,12 @@ echo <<<HTML
      <label for="weight">Weight:</label>
      <input type="number" id="weight" name="weight" min="" max="" value={$weightLifted} />
       <input type = "hidden" name ="id" value = "{$exerciseId}" />
+      <br>
       <button type = "Submit" value="Save" name="Save">Save</button>
-    
+     <button name = "Cancel" value="Cancel"><a href =./{$returnPage}>Cancel</a></button>
     
      </form>
-      <button name = "Cancel" value="Cancel"><a href =./{$returnPage}>Cancel</a></button>
+     
     
         </div>
      
