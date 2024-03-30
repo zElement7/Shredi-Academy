@@ -1,5 +1,7 @@
 <?php
-session_start();
+
+    session_start();
+    global $conndb; // temporarily put here to resolve some issues
 require_once "./includes/DataBaseConnection.php";
 
 $returnPage = $_SESSION['lastPage'];
@@ -53,16 +55,11 @@ echo <<<HTML
       <br>
       <button type = "Submit" value="Save" name="Save">Save</button>
      <button name = "Cancel" value="Cancel"><a href =./{$returnPage}>Cancel</a></button>
-    
      </form>
-     
-    
         </div>
-     
      HTML;
      mysqli_close($conndb);
 ?>
-
     </body>
 </html>
 
