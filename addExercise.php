@@ -1,5 +1,5 @@
 <?php
-require_once "DataBaseConnection.php";
+require_once "./includes/DataBaseConnection.php";
 $query = "SELECT name FROM exercises";
 
 $result = $conndb->query($query);

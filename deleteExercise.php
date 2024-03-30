@@ -1,6 +1,6 @@
 <?php
 
-require_once "DataBaseConnection.php";
+require_once "./includes/DataBaseConnection.php";
 
 $toDelete = cleanInputValue($conndb, $_POST['toDelete']);
 

@@ -1,6 +1,7 @@
 <?php
-require_once "DataBaseConnection.php";
 session_start();
+require_once "./includes/DataBaseConnection.php";
+
 $_SESSION['lastPage'] = "exercise.php"; //let exercise edit redirect to wanted page
 //if we are editing an exercise we want to let the user
 //see the same screen as when they left and have it ordered by musclegroup/name
@@ -29,7 +30,7 @@ if ($sortByName == "yes") {
 $result = $conndb->query($query);
 
 if (!$result) {
-    $message = "Whole query " . $search;
+    $message = "Invalid Query";
     echo $message;
     die('Invalid query: ' . mysql_error($conndb));
 }
@@ -48,7 +49,7 @@ if (!$result) {
 
     </head>
     <body>
-        <?php include_once("includes/nav.php") ?>
+        <?php include_once "./includes/nav.php"; ?>
         <div class="contentWrapper">
             <h1>Exercises</h1>
             <form method="post" action="">
@@ -151,13 +152,6 @@ if (!$result) {
                 ?>
 
             </div>
-            <script>
-                function deleteExercise()
-                {
-                    let form = document.getElementById("deleteForm");
-                    form.submit();
-
-                }
-            </script>
+           
     </body>
 </html>

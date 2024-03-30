@@ -1,8 +1,7 @@
 <?php
-//require_once './DataBaseConnection.php';
-require_once "DataBaseConnection.php";
-
 session_start();
+require_once "./includes/DataBaseConnection.php";
+
 $returnPage = $_SESSION['lastPage'];
 
 if (isset($_POST['exerciseId'])) {

@@ -1,7 +1,7 @@
 <?php
 session_start();
 $returnPage = $_SESSION['lastPage'];
-require_once "DataBaseConnection.php";
+require_once "./includes/DataBaseConnection.php";
 
 $reps = cleanInputValue($conndb, $_POST['reps']);
 $sets = cleanInputValue($conndb, $_POST['sets']);
