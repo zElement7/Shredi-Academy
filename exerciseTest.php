@@ -34,7 +34,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Exercises</title>
+    <title>Exercises Test</title>
     <link rel="stylesheet" href="./css/style.css" type="text/css">
 </head>
 <body>
