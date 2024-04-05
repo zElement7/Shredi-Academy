@@ -2,6 +2,22 @@
     // start session for all pages that include this file
     session_start();
     
+    /* Instantiate Global Variables */
+    $homeMessage = "Welcome"; // default home message
+    
+    // default values for whether an account has been created or not, the passwords match, and if the username is unique
+    $accountCreated = $passwordsMatch = $uniqueUsername = false;
+    /* -------------------------------------------- */
+    
+    // secures inputs from user
+    function cleanInputValue($con, $string)
+    {
+        $string = stripslashes($string);
+        $string = htmlentities($string);
+        
+        return $con->real_escape_string($string);
+    }
+    
     // adds a new custom exercise to the table in the database with specified values for each column
     function addExercise($n, $s, $r, $w, $mg, $dl)
     {
@@ -32,31 +48,11 @@
         return mysqli_close($connect);
     }
     
-    function viewExercises()
-    {
-        $connect = connectToDB();
-        $sql = 'SELECT * FROM exercises;';
-        $results = mysqli_query($connect, $sql);
-        
-        if(!mysqli_num_rows($results))
-        {
-            return false;
-        }
-        
-        while($exercisesArray = mysqli_fetch_array($results, MYSQLI_ASSOC))
-        {
-            $return[] = $exercisesArray['name'];
-        }
-        mysqli_close($connect);
-        
-        return $return;
-    }
-    
     // displays all exercises in the table ordered by the muscle group from most to least in a category
-    function viewExercisesByMuscleGroup()
+    function viewExercisesMuscleGroup()
     {
         $connect = connectToDB();
-        $sql = "SELECT * FROM exercises ORDER BY muscle_group DESC;";
+        $sql = "SELECT * FROM exercises ORDER BY exercise_type DESC;";
         $results = mysqli_query($connect, $sql);
         
         if(!mysqli_num_rows($results))
@@ -74,7 +70,7 @@
     }
     
     // displays all exercises in the table in alphabetical order
-    function viewExercisesByAlphabeticalOrder()
+    function viewExercisesAlphabetical()
     {
         $connect = connectToDB();
         $sql = "SELECT * FROM exercises ORDER BY name;";
@@ -94,14 +90,25 @@
         return $return;
     }
     
-    // used to log in to the site -- compare username and password to sets in the database
+    // gets the username of currently logged-in user -- NEEDS TO BE FINISHED
+    function getCurrentUsername()
+    {
+        $connect = connectToDB();
+        $sql = "SELECT username FROM users;";
+        $results = mysqli_query($connect, $sql);
+        
+        mysqli_close($connect);
+        return $results;
+    }
+    
+    // used to log in to the site -- compares username and password to sets in the database
     function getUserFromDB($u, $p)
     {
         // convert input password to hashed form to be able to check
         $p = hashInput($p);
         
         $connect = connectToDB();
-        $sql = "SELECT * FROM user WHERE BINARY username='$u' and BINARY password='$p';";
+        $sql = "SELECT * FROM users WHERE BINARY username='$u' and BINARY password='$p';";
         $results = mysqli_query($connect, $sql);
         
         mysqli_close($connect);
@@ -121,7 +128,7 @@
         $p = hashInput($p);
         
         $connect = connectToDB();
-        $sql = 'INSERT INTO user (username, password) VALUES ("'.$u.'","'. $p.'");';
+        $sql = 'INSERT INTO users (username, password) VALUES ("'.$u.'","'. $p.'");';
         mysqli_query($connect, $sql);
         
         // no values need to be returned, so we just close the connection and function ends
@@ -132,7 +139,7 @@
     function compareUsernameToDB($u)
     {
         $connect = connectToDB();
-        $sql = "SELECT * FROM user WHERE username='$u';";
+        $sql = "SELECT * FROM users WHERE username='$u';";
         $results = mysqli_query($connect, $sql);
         
         // check if any rows are returned
@@ -164,7 +171,7 @@
     // define constant connection variables
     const HOST = 'localhost';
     const USER = 'root';
-    const PASS = 'unknown';
+    const PASS = 'Shr3dI-@caDemy'; // remote password
     const DB = 'shredi_academy_project';
     
     // connect to database

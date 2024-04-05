@@ -162,7 +162,6 @@ nav li.active
 {
     font-size: 1.5em;
     min-height: 40px;
-    
 }
 
 #progressTimeFrame
@@ -178,5 +177,85 @@ nav li.active
     padding: 25px;
     color: #156082;
     font-size: 2em;
-    
+}
+
+/* Zach's added styling used for account-related items */
+p.warning
+{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 1px;
+    padding: 10px;
+    background-color: rgba(200,0,0,.5);
+    width: 75%;
+    border-radius: 8px;
+    color: white;
+    font-size: 25px;
+}
+
+.button-group input
+{
+    margin: 10px 10px -5px;
+}
+
+.button-group input[type="submit"],
+.button-group button[type="button"]
+{
+    background-color: #95b5cf;
+    color: black;
+    border: none;
+    cursor: pointer;
+    margin: 10px 10px -5px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: transform 500ms;
+}
+
+.button-group button[type="lonely-button"]
+{
+    background-color: #95b5cf;
+    color: black;
+    border: none;
+    cursor: pointer;
+    margin: -5px 10px -5px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: transform 500ms;
+}
+
+.button-group input[type="submit"]:hover,
+.button-group button[type="button"]:hover,
+.button-group button[type="lonely-button"]:hover
+{
+    background-color: #4b6c93;
+    transform: scale(1.15);
+    transition: transform 500ms;
+}
+
+.button-group input[type="submit"]:disabled
+{
+    background-color: #777777;
+    color: black;
+    cursor: not-allowed;
+    transform: scale(1);
+    transition: none;
+}
+
+.button-group input[type="reset"]
+{
+    background-color: #bababa;
+    color: black;
+    border: none;
+    cursor: pointer;
+    margin: 10px 10px -5px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: transform 500ms;
+}
+
+.button-group input[type="reset"]:hover
+{
+    background-color: #969696;
+    transform: scale(1.15);
+    transition: transform 500ms;
 }
