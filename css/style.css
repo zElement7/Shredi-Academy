@@ -138,3 +138,45 @@ nav li.active
     display:block;
     
 }
+
+#progressWrapper
+{
+    display:flex;
+    padding: 20px;
+}
+
+#summaryDiv
+{
+    width: 30%;
+    display:block;
+    padding: 20px;
+}
+
+#progressGraph
+{
+    width: 70%;
+    padding: 20px;
+}
+
+.progressRecords
+{
+    font-size: 1.5em;
+    min-height: 40px;
+    
+}
+
+#progressTimeFrame
+{
+    padding: 15px;
+    color: #156082;
+    display:flex;
+    justify-content: center;
+}
+
+#progressTimeFrame div
+{
+    padding: 25px;
+    color: #156082;
+    font-size: 2em;
+    
+}
