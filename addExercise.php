@@ -1,21 +1,35 @@
 <?php
 require_once "./includes/DataBaseConnection.php";
-$query = "SELECT name FROM exercises";
 
-$result = $conndb->query($query);
-
-if (!$result) {
+    /**
+     * Check if the sql response was successful and if not display
+     * error
+     * @param type $queryResult SQL response 
+     */
+   function sqlErrorCheck($queryResult)
+{
+    if (!$queryResult) {
     $message = "Whole query " . $search;
     echo $message;
     die('Invalid query: ' . mysql_error($conndb));
 }
+}
+//get all the exercise names from the database so we can
+//check we aren't adding an exercise with the same name
+$query = "SELECT name FROM exercises";
+$result = $conndb->query($query);
+
+sqlErrorCheck($result);
+
 $existingExercises = array();
+
 while ($myExercises = $result->fetch_assoc()) {
     $existingExercises[] = $myExercises['name'];
 }
 $json = json_encode($existingExercises);
 echo "<script> let existingExercises = $json; </script>";
 
+//See if we posted a new exercise name, if we did, add it's info to the database
 if (isset($_POST['newName']) && $_POST['newName'] != "") {
     $newName = cleanInputValue($conndb, $_POST['newName']);
     $muscleGroup = cleanInputValue($conndb, $_POST['muscleGroup']);
@@ -24,17 +38,29 @@ if (isset($_POST['newName']) && $_POST['newName'] != "") {
     $weight = cleanInputValue($conndb, $_POST['weight']);
 
     $updateQuery = "INSERT INTO exercises (name, exercise_type, reps, sets, weight) VALUES('$newName'"
-            . ",'$muscleGroup', '$reps', '$sets', '$weight')";
+            . ",'$muscleGroup', '$reps', '$sets', '$weight');";
     $success = $conndb->query($updateQuery);
-    header("Location:exercise.php");
-
-    if ($success == false) {
-        $failmess = "Whole query " . $insert . "<br>";
-        echo $failmess;
-        print('Invalid query: ' . mysqli_error($con) . "<br>");
-    } else {
-        echo "Exercise added<br>";
-    }
+    
+    sqlErrorCheck($success);
+    echo "Exercise added<br>";
+    
+    
+      //get the id of the new exercise, add new entry to progress table
+    $addedExerciseQuery = "SELECT id FROM exercises WHERE name = '$newName'";
+    $newExerciseID = $conndb->query($addedExerciseQuery);
+     $id = $newExerciseID->fetch_assoc();
+      date_default_timezone_set('America/Boise');
+     $todaysDate = date("Y-m-d");
+     
+    $progressQuery = "INSERT INTO `progress` (`date`, `exercise_id`, `weight`, `first_entry`, `personal_best`) "
+            . "VALUES ('$todaysDate', {$id['id']} ,$weight,1,1);";
+    
+    $progressResponse = $conndb->query($progressQuery);
+    
+    sqlErrorCheck($progressResponse);
+    
+    
+     header("Location:exercise.php");
 }
 ?>
 <!doctype html>
@@ -48,6 +74,12 @@ if (isset($_POST['newName']) && $_POST['newName'] != "") {
 
         <script>
 
+            /**
+            * Check our lists of existing exercises.  If the exercise name the user picks
+            * already exists then display an error and prevent them from adding it.  
+            * If the name does not exist add the new exercise.
+            * @returns {undefined}
+            */
             function checkIfExists()
             {
                 let proposedName = document.getElementById("newName").value;
