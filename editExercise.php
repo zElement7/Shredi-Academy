@@ -75,7 +75,9 @@ if ($exerciseProgress->num_rows <= 0) {
                 . "`personal_best`) VALUES ('$todaysDate', $exerciseId,$weight,0,1);";
         $sqlResult = $conndb->query($updateProgressQuery);
         $updateProgressQuery = "UPDATE progress SET personal_best = 0 WHERE id = $oldPersonalBestId;";
-    } else {
+    } 
+    //if not add the progress, don't set it as personal best
+    else {
         $updateProgressQuery = "INSERT INTO `progress` (`date`, `exercise_id`, `weight`, `first_entry`, "
                 . "`personal_best`) VALUES ('$todaysDate', $exerciseId,$weight,0,0);";
     }
@@ -87,8 +89,6 @@ if ($sqlResult == false) {
     echo $failmess;
     print('Invalid query: ' . mysqli_error($conndb) . "<br>");
 }
-
-
 
 
 mysqli_close($conndb);

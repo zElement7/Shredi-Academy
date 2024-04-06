@@ -3,6 +3,7 @@ session_start();
 require_once "./includes/DataBaseConnection.php";
 
 $_SESSION['lastPage'] = "exercise.php"; //let exercise edit redirect to wanted page
+
 //if we are editing an exercise we want to let the user
 //see the same screen as when they left and have it ordered by musclegroup/name
 if (isset($_SESSION['exerciseSort'])) {
@@ -19,11 +20,11 @@ if (isset($_POST['sortAlphabetically'])) {
 //use sql query to list order of exercises
 if ($sortByName == "yes") {
     //$query = "SELECT name, id, custom_exercise, exercise_type FROM exercises order by name";
-    $query = "SELECT name, id, exercise_type FROM exercises order by name";
+    $query = "SELECT name, id, exercise_type, 'custom_exercise' FROM exercises order by name";
 } else {
 
-    //$query = "SELECT name, id, custom_exercise, exercise_type FROM exercises order by custom_exercise, name";
-    $query = "SELECT name, id, exercise_type FROM exercises order by custom_exercise, name";
+    $query = "SELECT name, id, custom_exercise, exercise_type FROM exercises order by custom_exercise, name";
+   // $query = "SELECT name, id, exercise_type FROM exercises order by custom_exercise, name";
 }
 
 
@@ -73,7 +74,7 @@ if (!$result) {
                 }
 // output data of each row
                 while ($myExercises = $result->fetch_assoc()) {
-                    $myExercises['custom_exercise'] = true;
+             
                     //if this is a custom exercise allow the user to delete it by adding a clickable trashcan
                     // icon.  If it is a default exercise do not allow this functionaility
                     if ($sortByName == "yes") {
