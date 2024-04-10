@@ -20,10 +20,10 @@ if (isset($_POST['sortAlphabetically'])) {
 //use sql query to list order of exercises
 if ($sortByName == "yes") {
     //$query = "SELECT name, id, custom_exercise, exercise_type FROM exercises order by name";
-    $query = "SELECT name, id, exercise_type, 'custom_exercise' FROM exercises order by name";
+    $query = "SELECT name, id, exercise_type, custom_exercise FROM exercises order by name";
 } else {
 
-    $query = "SELECT name, id, custom_exercise, exercise_type FROM exercises order by custom_exercise, name";
+    $query = "SELECT name, id, custom_exercise, exercise_type FROM exercises order by exercise_type, name";
    // $query = "SELECT name, id, exercise_type FROM exercises order by custom_exercise, name";
 }
 
@@ -78,7 +78,7 @@ if (!$result) {
                     //if this is a custom exercise allow the user to delete it by adding a clickable trashcan
                     // icon.  If it is a default exercise do not allow this functionaility
                     if ($sortByName == "yes") {
-                        if ($myExercises['custom_exercise'] == true) {
+                        if($myExercises['custom_exercise'] == 1) {
                             echo <<<HTML
                     <div class='exerciseDiv'>
                     <form method="post" action="individualExercise.php" style="width:100%;">
@@ -94,7 +94,8 @@ if (!$result) {
                                 </form>
                     <div>
                     HTML;
-                        } else {
+                        }
+                        else {
 
                             echo <<<HTML
                     <div class='exerciseDiv'>
@@ -105,7 +106,7 @@ if (!$result) {
                                     </div>
                         </button>
                                 </form>
-                                <span></span>
+                               
                     <div>
                     HTML;
                         }

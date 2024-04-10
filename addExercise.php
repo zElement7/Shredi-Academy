@@ -37,8 +37,8 @@ if (isset($_POST['newName']) && $_POST['newName'] != "") {
     $sets = cleanInputValue($conndb, $_POST['sets']);
     $weight = cleanInputValue($conndb, $_POST['weight']);
 
-    $updateQuery = "INSERT INTO exercises (name, exercise_type, reps, sets, weight) VALUES('$newName'"
-            . ",'$muscleGroup', '$reps', '$sets', '$weight');";
+    $updateQuery = "INSERT INTO exercises (name, exercise_type, reps, sets, weight, custom_exercise) VALUES('$newName'"
+            . ",'$muscleGroup', '$reps', '$sets', '$weight', 1);";
     $success = $conndb->query($updateQuery);
     
     sqlErrorCheck($success);
