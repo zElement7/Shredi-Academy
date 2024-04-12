@@ -47,7 +47,7 @@
                 echo '<p class="warning">Entered username already exists, please choose a different one.</p>';
             }
         ?>
-        <div class="form-container">
+        <div class="contentWrapper">
             <?php if (!$accountCreated) { ?>
                 <h2>Create an Account</h2>
                 <form method="POST" autocomplete="off">

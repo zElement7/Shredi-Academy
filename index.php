@@ -53,7 +53,7 @@
                     echo '<p class="warning">Invalid Login.</p>'; // login fail warning message
             }
         ?>
-        <div class="form-container">
+        <div class="contentWrapper">
             <?php
                 // change top text message once logged in
                 $homeMessage = ($_SESSION['granted'] ? "Welcome to Shredi Academy!" : $homeMessage);
