@@ -50,6 +50,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     echo "<p>Workout added successfully!</p>";
 }
+
+$today = date("Y-m-d");
+$dayofweek = date('w', strtotime($today));
+
+echo $dayofweek;
 ?>
 
 </body>
