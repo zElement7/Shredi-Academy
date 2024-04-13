@@ -260,3 +260,33 @@ p.warning
     transform: scale(1.15);
     transition: transform 500ms;
 }
+
+.workoutDetails
+{
+    display:flex;
+}
+
+.workoutBox
+{
+    background-color: #156082;
+    height: 4em;
+    margin: 2px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center; /* Align horizontal */
+    align-items: center; /* Align vertical */
+    width: 100%;
+
+}
+
+.workoutText
+{
+    color: white;
+    font-size: 2em;
+    text-align: center;
+}
+
+.workoutText 
+{
+    
+}
