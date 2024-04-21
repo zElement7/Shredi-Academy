@@ -47,7 +47,7 @@ if (!$exerises) {
             foreach($daysOfWeek as $d)
             {
                 $d = sanitize_input($d);
-                $days .= " $d";
+                $days .= "$d ";
                 
             }
             
@@ -139,11 +139,11 @@ if (!$exerises) {
                <br>
                 <label for="muscle_group">Muscle Group:</label>
                 <select name="muscle_group" id="muscle_group">
-                    <option value="chest">Chest</option>
-                    <option value="back">Back</option>
-                    <option value="legs">Legs</option>
-                    <option value="shoulders">Shoulders</option>
-                    <option value="arms">Arms</option>
+                    <option value="Chest">Chest</option>
+                    <option value="Back">Back</option>
+                    <option value="Legs">Legs</option>
+                    <option value="Shoulders">Shoulders</option>
+                    <option value="Arms">Arms</option>
                     <!-- Add more options as needed -->
                 </select>
                 <br>

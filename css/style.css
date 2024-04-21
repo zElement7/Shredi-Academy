@@ -292,3 +292,17 @@ p.warning
     font-size: 2em;
     text-align: center;
 }
+
+#editWorkoutBox
+{
+    background-color: white;
+    border: #156082 solid;
+    margin: auto;
+    border-radius: 25px;
+    justify-content: center; /* Align horizontal */
+    align-items: center; /* Align vertical */
+    color:#156082;
+    font-size: 1.25em;
+    text-align: center;
+    width: 25%;
+}

@@ -62,7 +62,11 @@ echo <<<HTML
         <div class="contentWrapper">     
         <div class="editPageDiv container-fluid text-center w-100">
         <h1>{$workoutName}</h1>
-        </br>
+        <form method = "post" action = "editWorkout.php">
+        <button id="editWorkoutBox" type = "submit" name="workoutToEdit" value = '{$workoutId}'>Edit Workout</button>
+        </form>   
+
+         </br>
         <h3>Days of Week : {$workoutDays}</h3>
         <h3>Muscle Group : {$workoutMuscleGroup}</h3>
         <h3>Difficulty Level : {$workoutDifficulty}</h3>
