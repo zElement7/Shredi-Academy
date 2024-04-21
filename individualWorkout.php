@@ -19,8 +19,8 @@ if (isset($_GET['workoutId'])) {
 
 //use workout id to select the exercise from the database
 $sqlQuery = "Select e.name as exerciseName, e.id as exerciseId, e.sets as sets, e.reps as reps, e.weight as weight, "
-        . "w.Name as workoutName, w.Difficulty_Level as difficultyLevel, "
-        . "w.Day_of_the_Week as dayOfWeek, w.Muscle_Group as muscleGroup FROM workouts as w "
+        . "w.name as workoutName, w.difficulty_level as difficultyLevel, "
+        . "w.day_of_the_week as dayOfWeek, w.muscle_group as muscleGroup FROM workouts as w "
 ."INNER JOIN workout_exercise_connection as c ON c.workoutId = w.id INNER JOIN exercises as e ON c.exerciseId = e.id WHERE w.id = {$workoutId};";
 
 $result = $conndb->query($sqlQuery);

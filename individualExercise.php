@@ -4,7 +4,7 @@
     global $conndb; // temporarily put here to resolve some issues
 require_once "./includes/DataBaseConnection.php";
 
-$returnPage = $_SESSION['lastPage'];
+$returnPage = "./" . $_SESSION['lastPage'];
 
 if (isset($_POST['exerciseId'])) {
    // $exerciseId = cleanInputValue($conndb, $_POST['exerciseId']);
@@ -54,7 +54,7 @@ echo <<<HTML
       <input type = "hidden" name ="id" value = "{$exerciseId}" />
       <br>
       <button type = "Submit" value="Save" name="Save">Save</button>
-     <button name = "Cancel" value="Cancel"><a href =./{$returnPage}>Cancel</a></button>
+     <button name = "Cancel" value="Cancel"><a href ={$returnPage}>Cancel</a></button>
      </form>
         </div>
      HTML;

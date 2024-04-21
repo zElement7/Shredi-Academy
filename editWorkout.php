@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['muscle_group'])) {
     }
 
     //add the workout
-    $editQuery = "UPDATE workouts SET Muscle_Group = '$muscle_group', Day_of_the_Week = '$days', Difficulty_Level = $difficulty "
+    $editQuery = "UPDATE workouts SET muscle_group = '$muscle_group', day_of_the_week = '$days', difficulty_level = $difficulty "
             . "WHERE id = $workoutId; ";
    
     

@@ -2,7 +2,7 @@
 session_start();
 require_once "./includes/DataBaseConnection.php";
 
-$query = "SELECT id, Name, Day_of_the_Week, Muscle_Group, Difficulty_Level  FROM workouts order by Day_of_the_Week, Name";
+$query = "SELECT id, name, day_of_the_week, muscle_group, difficulty_level  FROM workouts order by day_of_the_week, name";
 
 $result = $conndb->query($query);
 
@@ -45,10 +45,10 @@ while ($myWorkouts = $result->fetch_assoc()) {
                     <form method="get" action="individualWorkout.php" style="width:100%;">
                             <button class='workoutBox' type="submit" name ="workoutId" value='{$myWorkouts['id']}'> 
                             <div id='workout{$myWorkouts['id']}' class = 'workoutText'>
-                                {$myWorkouts['Name']}</div>
+                                {$myWorkouts['name']}</div>
                                 <div class = 'workoutDetails'>    
-                               {$myWorkouts['Day_of_the_Week']} {$myWorkouts['Muscle_Group']}
-                                   Difficulty Level: {$myWorkouts['Difficulty_Level']}
+                               {$myWorkouts['day_of_the_week']} {$myWorkouts['muscle_group']}
+                                   Difficulty Level: {$myWorkouts['difficulty_level']}
                                
                             </div>
                         </button>
