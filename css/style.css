@@ -90,10 +90,9 @@ nav li.active
 .exerciseBox
 {
     background-color: #156082;
-    height: 4em;
     margin: 2px;
     border-radius: 25px;
-    display: flex;
+    display: block;
     justify-content: center; /* Align horizontal */
     align-items: center; /* Align vertical */
     width: 100%;
@@ -263,16 +262,24 @@ p.warning
 
 .workoutDetails
 {
-    display:flex;
+    color: white;
+  text-align: center;
+  font-size: 1.25em;
+}
+
+.individualWorkoutDetails
+{
+    color: white;
+  text-align: center;
+  font-size: 1.25em;
 }
 
 .workoutBox
 {
     background-color: #156082;
-    height: 4em;
     margin: 2px;
     border-radius: 25px;
-    display: flex;
+    display: block;
     justify-content: center; /* Align horizontal */
     align-items: center; /* Align vertical */
     width: 100%;
@@ -284,9 +291,4 @@ p.warning
     color: white;
     font-size: 2em;
     text-align: center;
-}
-
-.workoutText 
-{
-    
 }

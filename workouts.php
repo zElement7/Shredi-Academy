@@ -2,7 +2,7 @@
 session_start();
 require_once "./includes/DataBaseConnection.php";
 
-$query = "SELECT id, Name, Day_of_the_Week, Muscle_Group, Difficulty_Level  FROM workout order by Day_of_the_Week, Name";
+$query = "SELECT id, Name, Day_of_the_Week, Muscle_Group, Difficulty_Level  FROM workouts order by Day_of_the_Week, Name";
 
 $result = $conndb->query($query);
 
@@ -42,14 +42,14 @@ while ($myWorkouts = $result->fetch_assoc()) {
 
     echo <<<HTML
                     <div class='exerciseDiv'>
-                    <form method="post" action="individualWorkout.php" style="width:100%;">
-                            <button class='workoutBox' type="submit" name ="workOutId" value='{$myWorkouts['id']}'> 
+                    <form method="get" action="individualWorkout.php" style="width:100%;">
+                            <button class='workoutBox' type="submit" name ="workoutId" value='{$myWorkouts['id']}'> 
                             <div id='workout{$myWorkouts['id']}' class = 'workoutText'>
-                                <h4>{$myWorkouts['Name']}</h4>
+                                {$myWorkouts['Name']}</div>
                                 <div class = 'workoutDetails'>    
-                               <h5>{$myWorkouts['Day_of_the_Week']}</h5><h5> {$myWorkouts['Muscle_Group']}</h5> 
-                                   </h5> <h5>Difficulty Level: {$myWorkouts['Difficulty_Level']}</h5>
-                               </div>
+                               {$myWorkouts['Day_of_the_Week']} {$myWorkouts['Muscle_Group']}
+                                   Difficulty Level: {$myWorkouts['Difficulty_Level']}
+                               
                             </div>
                         </button>
                          </form>

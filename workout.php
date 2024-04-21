@@ -1,6 +1,6 @@
 <?php
 require_once "./includes/DataBaseConnection.php";
-$query = "SELECT Name FROM workout";
+$query = "SELECT Name FROM workouts";
 $result = $conndb->query($query);
 
 //send all existing workout names to js variable so we can make sure we 
@@ -52,13 +52,13 @@ if (!$exerises) {
             }
             
             //add the workout
-            $addQuery = "INSERT INTO workout (Name, Day_of_the_Week, Muscle_Group, Difficulty_Level)"
+            $addQuery = "INSERT INTO workouts (Name, Day_of_the_Week, Muscle_Group, Difficulty_Level)"
                     . " VALUES ('$workout_name', '$days', '$muscle_group', $difficulty);";
             
             $added = $conndb->query($addQuery);
             
             //get the newly created workout id so we can add exercises to it in workout_exercise_connection table
-            $idQuery = "SELECT id FROM workout WHERE Name = '$workout_name'";
+            $idQuery = "SELECT id FROM workouts WHERE Name = '$workout_name'";
             
             $idResult = $conndb->query($idQuery);
             $id = $idResult->fetch_row()[0];
