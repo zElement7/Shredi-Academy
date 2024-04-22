@@ -1,4 +1,5 @@
 <?php
+    session_start();
 require_once "./includes/DataBaseConnection.php";
 
     /**
@@ -111,6 +112,7 @@ if (isset($_POST['newName']) && $_POST['newName'] != "") {
         </script>
     </head>
     <body>
+        <?php include_once "./includes/nav.php"; ?>
         <div class="container-fluid text-center w-100">
             <h1>Add Exercise</h1>
 

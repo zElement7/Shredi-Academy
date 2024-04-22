@@ -1,5 +1,5 @@
 <?php
-    include_once('includes/functions.php');
+session_start();
 require_once "./includes/DataBaseConnection.php";
 
 $wokoutName = "";
@@ -56,7 +56,7 @@ if (mysqli_num_rows($result) > 0) {
     </head>
     <body>
 <?php
- include_once "./includes/nav.php";
+    include_once "./includes/nav.php";
        
 echo <<<HTML
         <div class="contentWrapper">     

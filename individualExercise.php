@@ -1,6 +1,5 @@
 <?php
-    include_once('includes/functions.php');
-    
+    session_start();
     global $conndb; // temporarily put here to resolve some issues
 require_once "./includes/DataBaseConnection.php";
 

@@ -1,7 +1,7 @@
 <?php
-    include_once('includes/functions.php');
+session_start();
 require_once "./includes/DataBaseConnection.php";
-$query = "SELECT Name FROM workouts";
+$query = "SELECT name FROM workouts";
 $result = $conndb->query($query);
 
 //send all existing workout names to js variable so we can make sure we 
@@ -161,6 +161,7 @@ if (!$exerises) {
         </script>
     </head>
     <body>
+        <?php include_once "./includes/nav.php"; ?>
         <div class="container-fluid text-center w-100">
             <h2>Add Workout</h2>
 
@@ -227,7 +228,6 @@ if (!$exerises) {
             <div id="errorMessage" class="hidden"></div>
            <?php 
            echo "<div id='message'>$message</div>";
-           
            ?>
         </div>
     </body>

@@ -1,5 +1,6 @@
 <?php
-    include_once('includes/functions.php');
+    session_start();
+    require_once "./includes/DataBaseConnection.php";
 
 $query = "SELECT id, name FROM exercises ORDER BY name;";
 
@@ -139,11 +140,8 @@ function showExerciseProgress($pb, $iW, $dateAndWeight) {
     </head>
     <body>
 <?php include_once("includes/nav.php") ?>
-
-
         <div class="contentWrapper">
             <h1>Progress</h1>
-
             <div id="progressWrapper">
                 <div id = "summaryDiv">
                     <form method ="post"> 

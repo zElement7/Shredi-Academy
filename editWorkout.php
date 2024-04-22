@@ -85,6 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['muscle_group'])) {
 
     </head>
     <body>
+        <?php include_once "./includes/nav.php"; ?>
         <div class="container-fluid text-center w-100">
 <?php echo "<h2>Edit $name</h2>"; ?>
 
