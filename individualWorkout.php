@@ -2,7 +2,6 @@
 session_start();
 require_once "./includes/DataBaseConnection.php";
 
-$_SESSION['lastPage'] = $_SERVER["REQUEST_URI"];
 $wokoutName = "";
 $workoutDays = "";
 $workoutMuscleGroup = "";
@@ -16,7 +15,7 @@ if (isset($_GET['workoutId'])) {
     $workoutId = "Workout not found";
 }
 
-
+$_SESSION['lastPage'] = "individualWorkout.php?workoutId=$workoutId";
 //use workout id to select the exercise from the database
 $sqlQuery = "Select e.name as exerciseName, e.id as exerciseId, e.sets as sets, e.reps as reps, e.weight as weight, "
         . "w.name as workoutName, w.difficulty_level as difficultyLevel, "
@@ -48,9 +47,10 @@ if (mysqli_num_rows($result) > 0) {
 <html lang="en">
     <head>
         <title>Exercises</title>
-        <link rel="stylesheet" href="./css/style.css" type="text/css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+         <link rel="stylesheet" href="./css/style.css" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
     </head>
@@ -70,21 +70,31 @@ echo <<<HTML
         <h3>Days of Week : {$workoutDays}</h3>
         <h3>Muscle Group : {$workoutMuscleGroup}</h3>
         <h3>Difficulty Level : {$workoutDifficulty}</h3>
-        <form method="post" action="individualExercise.php" style="width:100%;">
+        
+        
      HTML;
        
 
      for($n = 0; $n < sizeof($exerciseInfo); $n++)
      {
 echo <<< HTML
+            <div class='exerciseDiv'>     
+             <form method="post" action="individualExercise.php" style="width:100%;">
              <button class='exerciseBox' type="submit" name="exerciseId" value='{$exerciseInfo[$n][1]}'> 
           <div id='exercise{$exerciseInfo[$n][1]}' class = 'workoutText'>{$exerciseInfo[$n][0]}</div>
               <div class="individualWorkoutDetails">Sets: {$exerciseInfo[$n][2]} Reps: {$exerciseInfo[$n][3]} Weight: {$exerciseInfo[$n][4]} lbs
-                  </div></button>
+                  </div></button></form>
+                             <form id="removeExercise" action="removeExercise.php" method="post">
+                            <input type="hidden" name="toRemove" value="{$workoutId}-{$exerciseInfo[$n][1]}">
+                            <button type="submit" class='glyphicon glyphicon-trash'></button>     
+                                </form>
+                            </div>
       HTML;         
      }
      
-               echo"</div></div></form>";
+         
+               
+
                         
         
 mysqli_close($conndb);

@@ -1,6 +1,6 @@
 <?php
 require_once "./includes/DataBaseConnection.php";
-$query = "SELECT Name FROM workouts";
+$query = "SELECT name FROM workouts";
 $result = $conndb->query($query);
 
 //send all existing workout names to js variable so we can make sure we 
@@ -8,7 +8,7 @@ $result = $conndb->query($query);
 $existingWorkouts = array();
 
 while ($myWorkouts = $result->fetch_assoc()) {
-    $existingWorkouts[] = $myWorkouts['Name'];
+    $existingWorkouts[] = $myWorkouts['name'];
 }
 $json = json_encode($existingWorkouts);
 echo "<script> let existingWorkouts = $json; </script>";
