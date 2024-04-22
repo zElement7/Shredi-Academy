@@ -1,14 +1,14 @@
 <?php
 require_once "./includes/DataBaseConnection.php";
-$query = "SELECT name FROM workouts";
+$query = "SELECT Name FROM workouts";
 $result = $conndb->query($query);
 
 //send all existing workout names to js variable so we can make sure we 
-//done have duplicates
+//don't have duplicates
 $existingWorkouts = array();
 
 while ($myWorkouts = $result->fetch_assoc()) {
-    $existingWorkouts[] = $myWorkouts['name'];
+    $existingWorkouts[] = $myWorkouts['Name'];
 }
 $json = json_encode($existingWorkouts);
 echo "<script> let existingWorkouts = $json; </script>";
@@ -77,9 +77,39 @@ if (!$exerises) {
             {
                  $message = "<p>Workout added successfully!</p>";
             }
+     //Start of Robsen's update 4/21/24		
+			// Check if form is submitted to add/delete an exercise
+			if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['workout_id']) && isset($_POST['exercise_id'])) {
+			$workout_id = sanitize_input($_POST['workout_id']);
+			$exercise_id = sanitize_input($_POST['exercise_id']);
+
+			// Check if adding or deleting exercise
+			if (isset($_POST['add_exercise'])) {
+           // Logic to add exercise to workout
+           $addExerciseToWorkout = "INSERT INTO workout_exercise_connection (workoutId, exerciseId) VALUES ($workout_id, $exercise_id);";
+           $addConnection = $conndb->query($addExerciseToWorkout);
+
+           if ($addConnection) {
+              echo "Exercise added successfully to workout.";
+           } else {
+              echo "Failed to add exercise to workout.";
+           }
+           } elseif (isset($_POST['delete_exercise'])) {
+           // Logic to delete exercise from workout
+           $deleteExerciseFromWorkout = "DELETE FROM workout_exercise_connection WHERE workoutId = $workout_id AND exerciseId = $exercise_id;";
+           $deleteConnection = $conndb->query($deleteExerciseFromWorkout);
+
+           if ($deleteConnection) {
+             echo "Exercise deleted successfully from workout.";
+           } else {
+             echo "Failed to delete exercise from workout.";
+          } 
+    }
            
         }
         
+     //end of Robsen's update 4/21/24
+
 
 ?>
 <!DOCTYPE html>
