@@ -83,7 +83,7 @@
             {
                 $output .= "Exercise: {$row['exercise']}, Muscle Group: {$row['muscle_group']}, Difficulty Level: {$row['difficulty_level']}\n";
                 
-                $output .= "<a href='individualWorkout.php?id={$row['id']}'>View Workout</a><br>";
+                $output .= "<a href='individualWorkout.php?workoutId={$row['id']}'>View Workout</a><br>";
             }
         }
         else
