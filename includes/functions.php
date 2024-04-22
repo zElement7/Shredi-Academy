@@ -63,6 +63,15 @@
         $sql = "SELECT * FROM workouts WHERE FIND_IN_SET('$currentDayLetter', day_of_the_week)";
         $result = mysqli_query($connect, $sql);
         
+        // check if query executed successfully
+        if (!$result)
+        {
+            // handle query errors
+            echo "Error: " . mysqli_error($connect);
+            mysqli_close($connect);
+            return "Error: Unable to fetch workout information.";
+        }
+        
         $output = ""; // initiates an empty string to store the daily workout information that will be returned
         
         if (mysqli_num_rows($result) > 0)
@@ -90,7 +99,7 @@
     function viewExercisesMuscleGroup()
     {
         $connect = connectToDB();
-        $sql = "SELECT * FROM exercises ORDER BY muscle_group DESC;";
+        $sql = "SELECT * FROM exercises ORDER BY exercise_type DESC;";
         $results = mysqli_query($connect, $sql);
         
         if(!mysqli_num_rows($results))
@@ -128,7 +137,7 @@
         return $return;
     }
     
-    // gets the username of currently logged in user -- NEEDS TO BE FINISHED
+    // gets the username of currently logged-in user -- NEEDS TO BE FINISHED
     function getCurrentUsername()
     {
         $connect = connectToDB();
@@ -206,17 +215,16 @@
     }
     
     /* DATABASE CONNECTION INFORMATION AND FUNCTION */
-    // define constant connection variables
-    const HOST = 'localhost';
-    const USER = 'root';
-    const PASS = 'Shr3dI-@caDemy'; // remote password
-    //const PASS = 'unknown'; // local password
-    const DB = 'shredi_academy_project';
-    
-    // connect to database
-    function connectToDB()
-    {
-        return mysqli_connect(HOST, USER, PASS, DB);
-    }
+        // define constant connection variables
+        const HOST = 'localhost';
+        const USER = 'root';
+        const PASS = 'Shr3dI-@caDemy';
+        const DB = 'shredi_academy_project';
+        
+        // connect to database
+        function connectToDB()
+        {
+            return mysqli_connect(HOST, USER, PASS, DB);
+        }
     /* -------------------------------------------- */
 ?>
