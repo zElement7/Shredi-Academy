@@ -1,5 +1,5 @@
 <?php
-
+    include_once('includes/functions.php');
 ?>
 <!doctype html>
 <html lang="en">

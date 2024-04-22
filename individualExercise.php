@@ -1,6 +1,6 @@
 <?php
-
-    session_start();
+    include_once('includes/functions.php');
+    
     global $conndb; // temporarily put here to resolve some issues
 require_once "./includes/DataBaseConnection.php";
 
@@ -38,6 +38,7 @@ else{
 
     </head>
     <body>
+        <?php include_once "./includes/nav.php"; ?>
 <?php
 echo <<<HTML
         <div class="editPageDiv container-fluid text-center w-100">

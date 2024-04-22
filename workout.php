@@ -1,4 +1,5 @@
 <?php
+    include_once('includes/functions.php');
 require_once "./includes/DataBaseConnection.php";
 $query = "SELECT Name FROM workouts";
 $result = $conndb->query($query);

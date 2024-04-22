@@ -1,5 +1,5 @@
 <?php
-require_once "./includes/DataBaseConnection.php";
+    include_once('includes/functions.php');
 
 $query = "SELECT id, name FROM exercises ORDER BY name;";
 
