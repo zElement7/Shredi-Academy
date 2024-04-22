@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once "./includes/DataBaseConnection.php";
 $query = "SELECT name FROM workouts";
 $result = $conndb->query($query);
@@ -161,7 +160,6 @@ if (!$exerises) {
         </script>
     </head>
     <body>
-        <?php include_once "./includes/nav.php"; ?>
         <div class="container-fluid text-center w-100">
             <h2>Add Workout</h2>
 

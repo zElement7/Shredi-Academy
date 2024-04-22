@@ -37,7 +37,6 @@ else{
 
     </head>
     <body>
-        <?php include_once "./includes/nav.php"; ?>
 <?php
 echo <<<HTML
         <div class="editPageDiv container-fluid text-center w-100">

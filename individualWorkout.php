@@ -56,7 +56,6 @@ if (mysqli_num_rows($result) > 0) {
     </head>
     <body>
 <?php
-    include_once "./includes/nav.php";
        
 echo <<<HTML
         <div class="contentWrapper">     
