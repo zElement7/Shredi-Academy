@@ -4,6 +4,7 @@
     
     /* Instantiate Global Variables */
     $homeMessage = "Welcome"; // default home message
+    $currentDay = date('l'); // stores the current day of the week
     
     // default values for whether an account has been created or not, the passwords match, and if the username is unique
     $accountCreated = $passwordsMatch = $uniqueUsername = false;
@@ -48,11 +49,48 @@
         return mysqli_close($connect);
     }
     
+    function getDailyWorkout()
+    {
+        // get the current day of the week in an index (0 for Sunday through 6 for Saturday)
+        $currentDayIndex = date('w');
+        
+        // convert the current day index to the corresponding letter
+        $daysOfWeek = array('U', 'M', 'T', 'W', 'H', 'F', 'S');
+        $currentDayLetter = $daysOfWeek[$currentDayIndex];
+        
+        // prepare and execute the query to fetch workouts for the current day
+        $connect = connectToDB();
+        $sql = "SELECT * FROM workouts WHERE FIND_IN_SET('$currentDayLetter', day_of_the_week)";
+        $result = mysqli_query($connect, $sql);
+        
+        $output = ""; // initiates an empty string to store the daily workout information that will be returned
+        
+        if (mysqli_num_rows($result) > 0)
+        {
+            $output .= "Workout for today:\n";
+            
+            // append each workout to the output string
+            while ($row = mysqli_fetch_assoc($result))
+            {
+                $output .= "Exercise: {$row['exercise']}, Muscle Group: {$row['muscle_group']}, Difficulty Level: {$row['difficulty_level']}\n";
+                
+                $output .= "<a href='individualWorkout.php?id={$row['id']}'>View Workout</a><br>";
+            }
+        }
+        else
+        {
+            $output .= "No workout assigned for today.\n";
+        }
+        
+        mysqli_close($connect);
+        return $output;
+    }
+    
     // displays all exercises in the table ordered by the muscle group from most to least in a category
     function viewExercisesMuscleGroup()
     {
         $connect = connectToDB();
-        $sql = "SELECT * FROM exercises ORDER BY exercise_type DESC;";
+        $sql = "SELECT * FROM exercises ORDER BY muscle_group DESC;";
         $results = mysqli_query($connect, $sql);
         
         if(!mysqli_num_rows($results))
@@ -90,7 +128,7 @@
         return $return;
     }
     
-    // gets the username of currently logged-in user -- NEEDS TO BE FINISHED
+    // gets the username of currently logged in user -- NEEDS TO BE FINISHED
     function getCurrentUsername()
     {
         $connect = connectToDB();
@@ -172,6 +210,7 @@
     const HOST = 'localhost';
     const USER = 'root';
     const PASS = 'Shr3dI-@caDemy'; // remote password
+    //const PASS = 'unknown'; // local password
     const DB = 'shredi_academy_project';
     
     // connect to database
@@ -180,5 +219,4 @@
         return mysqli_connect(HOST, USER, PASS, DB);
     }
     /* -------------------------------------------- */
-    
 ?>

@@ -53,11 +53,17 @@
                     echo '<p class="warning">Invalid Login.</p>'; // login fail warning message
             }
         ?>
-        <div class="contentWrapper">
+        <div class="form-container">
             <?php
                 // change top text message once logged in
                 $homeMessage = ($_SESSION['granted'] ? "Welcome to Shredi Academy!" : $homeMessage);
                 echo "<h2>$homeMessage</h2>"; // display top text
+                
+                // if logged in, display the workout of the day
+                if ($_SESSION['granted'] === true)
+                {
+                    echo getDailyWorkout();
+                }
                 
                 // show login form if not logged in
                 if($_SESSION['granted'] === false && !isset($hideLoginForm))
