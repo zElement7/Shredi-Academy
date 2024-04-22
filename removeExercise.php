@@ -13,9 +13,7 @@ $workoutId = $exerciseRemoveInfo[0];
 $exerciseId = $exerciseRemoveInfo[1];
 
 
-// $removeQuery = "Delete FROM workout_exercise_connection WHERE workoutId = $workoutId and exerciseId = $exerciseId;";
-    $removeQuery = "DELETE FROM workout_exercise_connection WHERE id = (SELECT id FROM workout_exercise_connection WHERE "
-            . "(workoutId = $workoutId AND exerciseId = $exerciseId));";
+ $removeQuery = "Delete FROM workout_exercise_connection WHERE workoutId = $workoutId and exerciseId = $exerciseId;";
      
     $result = $conndb->query($removeQuery);
 
