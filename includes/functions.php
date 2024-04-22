@@ -95,6 +95,32 @@
         return $output;
     }
     
+    // gets individual workout name from the id in the database
+    function getWorkoutName($id)
+    {
+        $connect = connectToDB();
+        $sql = "SELECT name FROM workouts WHERE id='$id' LIMIT 1;";
+        $result = mysqli_query($connect, $sql);
+        
+        $row = mysqli_fetch_assoc($result);
+        
+        mysqli_close($connect);
+        return $row['name'];
+    }
+    
+    // gets individual exercise name from the id in the database
+    function getExerciseName($id)
+    {
+        $connect = connectToDB();
+        $sql = "SELECT name FROM exercises WHERE id='$id' LIMIT 1;";
+        $result = mysqli_query($connect, $sql);
+        
+        $row = mysqli_fetch_assoc($result);
+        
+        mysqli_close($connect);
+        return $row['name'];
+    }
+    
     // displays all exercises in the table ordered by the muscle group from most to least in a category
     function viewExercisesMuscleGroup()
     {
