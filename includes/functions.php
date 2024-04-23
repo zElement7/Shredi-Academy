@@ -163,15 +163,43 @@
         return $return;
     }
     
-    // gets the username of currently logged-in user -- NEEDS TO BE FINISHED
-    function getCurrentUsername()
+    // gets the profile information of the currently logged-in user
+    function getUserProfile($u)
     {
         $connect = connectToDB();
-        $sql = "SELECT username FROM users;";
-        $results = mysqli_query($connect, $sql);
+        $sql = "SELECT * FROM users WHERE username='$u';";
+        $result = mysqli_query($connect, $sql);
+        
+        if (!$result)
+        {
+            // handle query error
+            return false;
+        }
+        else
+        {
+            $profileData = mysqli_fetch_assoc($result);
+            mysqli_close($connect);
+            return $profileData;
+        }
+    }
+    
+    function updateUserProfile($u, $a, $h, $g, $w)
+    {
+        $connect = connectToDB();
+        $sql = "UPDATE user_info SET age='$a', height='$h', gender='$g', weight='$w' WHERE username='$u';";
+        $result = mysqli_query($connect, $sql);
+        
+        if ($result)
+        {
+            $output = "Profile updated successfully!";
+        }
+        else
+        {
+            $output = "Error:" . mysqli_error($connect);
+        }
         
         mysqli_close($connect);
-        return $results;
+        return $output;
     }
     
     // used to log in to the site -- compares username and password to sets in the database
