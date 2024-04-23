@@ -40,22 +40,22 @@
     <body>
         <?php include_once("includes/nav.php") ?>
         <h1>Profile Page</h1>
-        <div class="container">
+        <div class="contentWrapper">
             <h1>User Profile</h1>
             <?php
                 if (isset($successMessage)) echo "<p>" . $updateMessage . "</p>";
                 if (isset($errorMessage)) echo "<p>" . $errorMessage . "</p>";
                 else {
                     ?>
-                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                        <p><strong>Username:</strong><?php echo $profileData['username']; ?></p>
-                        <p><label for="age">Age:</label><input type="number" id="age" name="age" value="<?php echo $profileData['age']; ?>"</p>
-                        <p><label for="height">Height (in):</label><input type="number" id="height" name="height" value="<?php echo $profileData['height']; ?>"</p>
-                        <p><label for="gender">Gender:</label><input type="text" id="gender" name="gender" value="<?php echo $profileData['gender']; ?>"</p>
-                        <p><label for="weight">Weight (lbs):</label><input type="number" id="weight" name="weight" value="<?php echo $profileData['weight']; ?>"</p>
-                        <p><input type="submit" value="Update Profile"></p>
-                    </form>
-                <?php } ?>
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                    <p><strong>Username:</strong><?php echo $profileData['username']; ?></p>
+                    <p><label for="age">Age:</label><input type="number" id="age" name="age" value="<?php echo $profileData['age']; ?>"</p>
+                    <p><label for="height">Height (in):</label><input type="number" id="height" name="height" value="<?php echo $profileData['height']; ?>"</p>
+                    <p><label for="gender">Gender:</label><input type="text" id="gender" name="gender" value="<?php echo $profileData['gender']; ?>"</p>
+                    <p><label for="weight">Weight (lbs):</label><input type="number" id="weight" name="weight" value="<?php echo $profileData['weight']; ?>"</p>
+                    <p><input type="submit" value="Update Profile"></p>
+                </form>
+            <?php } ?>
         </div>
     </body>
 </html>
