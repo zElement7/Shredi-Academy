@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "./includes/DataBaseConnection.php";
-
+        
 $query = "SELECT id, name, day_of_the_week, muscle_group, difficulty_level  FROM workouts order by day_of_the_week, name";
 
 $result = $conndb->query($query);
@@ -54,7 +54,7 @@ while ($myWorkouts = $result->fetch_assoc()) {
                         </button>
                          </form>
                          <form id="deleteForm" action="deleteExercise.php" method="post">
-                            <input type="hidden" name="toDelete" value={$myWorkouts['id']}>
+                            <input type="hidden" name="'workout_id'" value={$myWorkouts['id']}>
                             <button type="submit" class='glyphicon glyphicon-trash'></button>     
                                 </form>
                     </div>
