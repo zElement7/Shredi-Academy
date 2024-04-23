@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "./includes/DataBaseConnection.php";
-
+$_SESSION['lastPage'] = "individualWorkout.php?workoutId=$workoutId";
 $wokoutName = "";
 $workoutDays = "";
 $workoutMuscleGroup = "";
@@ -15,7 +15,8 @@ if (isset($_GET['workoutId'])) {
     $workoutId = "Workout not found";
 }
 
-$_SESSION['lastPage'] = "individualWorkout.php?workoutId=$workoutId";
+
+
 //use workout id to select the exercise from the database
 $sqlQuery = "Select e.name as exerciseName, e.id as exerciseId, e.sets as sets, e.reps as reps, e.weight as weight, "
         . "w.name as workoutName, w.difficulty_level as difficultyLevel, "
@@ -83,8 +84,10 @@ echo <<< HTML
           <div id='exercise{$exerciseInfo[$n][1]}' class = 'workoutText'>{$exerciseInfo[$n][0]}</div>
               <div class="individualWorkoutDetails">Sets: {$exerciseInfo[$n][2]} Reps: {$exerciseInfo[$n][3]} Weight: {$exerciseInfo[$n][4]} lbs
                   </div></button></form>
-                             <form id="removeExercise" action="removeExercise.php" method="post">
-                            <input type="hidden" name="toRemove" value="{$workoutId}-{$exerciseInfo[$n][1]}">
+                             <form id="removeExercise" action="workout.php" method="post">
+                            <input type="hidden" name="workout_id" value="{$workoutId}">
+                            <input type="hidden" name="exercise_id" value="{$exerciseInfo[$n][1]}">
+                            <input type="hidden" name="delete_exercise" value="yes">
                             <button type="submit" class='glyphicon glyphicon-trash'></button>     
                                 </form>
                             </div>
