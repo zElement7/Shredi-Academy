@@ -60,7 +60,7 @@
         
         // prepare and execute the query to fetch workouts for the current day
         $connect = connectToDB();
-        $sql = "SELECT * FROM workouts WHERE FIND_IN_SET('$currentDayLetter', day_of_the_week)";
+        $sql = "SELECT * FROM workouts WHERE day_of_the_week LIKE '%$currentDayLetter%';";
         $result = mysqli_query($connect, $sql);
         
         // check if query executed successfully
