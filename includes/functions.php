@@ -50,7 +50,6 @@
                 }
 
                 $output .= "<div class = 'workoutGroup'><div class = 'workoutHome'> Workout: {$row['name']}</div> <div class = 'workoutInfoHome'>Muscle Group: {$row['muscle_group']} </div> <div class = 'workoutInfoHome'>Difficulty Level: <span style = 'color: {$difficultyColor};'>{$row['difficulty_level']}</span></div>\n";
-                
                 $output .= "<a href='individualWorkout.php?workoutId={$row['id']}'>View Workout</a><br></br></div>";
             }
         }

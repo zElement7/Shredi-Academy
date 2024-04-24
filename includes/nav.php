@@ -4,7 +4,6 @@
 <nav>
     <ul>
         <?php
-        
             // index.php appears as "Home" when logged in and appears as "Log In" when not logged in
             echo ($_SESSION['granted'] ? '<li'.(isCurrentPage('index.php') ? ' class="active"' : '').'><a href=".">Home</li>' : '<li'.(isCurrentPage('index.php') ? ' class="active"' : '').'><a href=".">Log In</a></li>');
             
@@ -12,6 +11,7 @@
             echo ($_SESSION['granted'] ? '<li'.(isCurrentPage('workouts.php') ? ' class="active"' : '').'><a href="./workouts.php">Workouts</a></li>' : '');
             if(isCurrentPage('individualWorkout.php')) echo '<li class="active"><a>'.getWorkoutName($_GET['workoutId']).'</a></li>';
             if(isCurrentPage('workout.php')) echo '<li class="active"><a>New Workout</a></li>';
+            if(isCurrentPage('editWorkout.php')) echo '<li class="active"><a>Edit '.getWorkoutName($_GET['workoutId']).'</a></li>';
             
             // add not clickable "exercise name" or "edit exercise" tab to nav bar after "exercises" if it is the currently loaded page
             echo ($_SESSION['granted'] ? '<li'.(isCurrentPage('exercise.php') ? ' class="active"' : '').'><a href="./exercise.php">Exercises</a></li>' : '');
