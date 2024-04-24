@@ -195,8 +195,8 @@
         // define constant connection variables
         const HOST = 'localhost';
         const USER = 'root';
-        const PASS = '';
-        const DB = 'csis2450';
+        const PASS = 'Shr3dI-@caDemy';
+        const DB = 'shredi_academy_project';
         
         // connect to database
         function connectToDB()

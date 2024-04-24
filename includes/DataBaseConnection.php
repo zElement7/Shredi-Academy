@@ -1,8 +1,8 @@
 <?php
 $host="localhost";
 $user="root";
-$password="";
-$dbname="csis2450";
+$password="Shr3dI-@caDemy";
+$dbname="shredi_academy_project";
 
 $conndb = new mysqli($host, $user, $password, $dbname)
 	or die ('Could not connect to the database server' . mysqli_connect_error());
