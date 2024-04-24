@@ -77,7 +77,7 @@ if (!$result) {
                         if($myExercises['custom_exercise'] == 1) {
                             echo <<<HTML
                     <div class='exerciseDiv'>
-                    <form method="post" action="individualExercise.php" style="width:100%;">
+                    <form method="post" action="individualExercise.php" style="width:90%;">
                             <button class='exerciseBox' type="submit" name ="exerciseId" value='{$myExercises['id']}'> 
                             <div id='exercise{$myExercises['id']}' class = 'exerciseText'>
                                 {$myExercises['name']}
@@ -95,7 +95,7 @@ if (!$result) {
 
                             echo <<<HTML
                     <div class='exerciseDiv'>
-                    <form method="post" action="individualExercise.php" style="width:100%;">
+                    <form method="post" action="individualExercise.php" style="width:90%;">
                         <button class='exerciseBox' type="submit" name ="exerciseId" value='{$myExercises['id']}'> 
                             <div id='exercise {$myExercises['id']}' class = 'exerciseText'>
                                 {$myExercises['name']}
@@ -112,7 +112,7 @@ if (!$result) {
                         if ($myExercises['custom_exercise'] == true) {
                             echo <<<HTML
                     <div class='exerciseDiv'>
-                    <form method="post" action="individualExercise.php" style="width:100%;">
+                    <form method="post" action="individualExercise.php" style="width:90%;">
                             <button class='exerciseBox' type="submit" name ="exerciseId" value='{$myExercises['id']}'> 
                             <div id='exercise{$myExercises['id']}' class = 'exerciseText'>
                             {$myExercises['exercise_type']} - {$myExercises['name']}
@@ -130,7 +130,7 @@ if (!$result) {
 
                             echo <<<HTML
                     <div class='exerciseDiv'>
-                    <form method="post" action="individualExercise.php" style="width:100%;">
+                    <form method="post" action="individualExercise.php" style="width:90%;">
                         <button class='exerciseBox' type="submit" name ="exerciseId" value='{$myExercises['id']}'> 
                             <div id='exercise {$myExercises['id']}' class = 'exerciseText'>
                             {$myExercises['exercise_type']} - {$myExercises['name']}

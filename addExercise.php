@@ -1,20 +1,20 @@
 <?php
-    session_start();
-    require_once "./includes/DataBaseConnection.php";
+session_start();
+require_once "./includes/DataBaseConnection.php";
 
-    /**
-     * Check if the sql response was successful and if not display
-     * error
-     * @param type $queryResult SQL response 
-     */
-   function sqlErrorCheck($queryResult)
-{
+/**
+ * Check if the sql response was successful and if not display
+ * error
+ * @param type $queryResult SQL response 
+ */
+function sqlErrorCheck($queryResult) {
     if (!$queryResult) {
-    $message = "Whole query " . $search;
-    echo $message;
-    die('Invalid query: ' . mysql_error($conndb));
+        $message = "Whole query " . $search;
+        echo $message;
+        die('Invalid query: ' . mysql_error($conndb));
+    }
 }
-}
+
 //get all the exercise names from the database so we can
 //check we aren't adding an exercise with the same name
 $query = "SELECT name FROM exercises";
@@ -41,25 +41,24 @@ if (isset($_POST['newName']) && $_POST['newName'] != "") {
     $updateQuery = "INSERT INTO exercises (name, exercise_type, reps, sets, weight, custom_exercise) VALUES('$newName'"
             . ",'$muscleGroup', '$reps', '$sets', '$weight', 1);";
     $success = $conndb->query($updateQuery);
-    
+
     sqlErrorCheck($success);
     echo "Exercise added<br>";
-    
-    
+
     //get the id of the new exercise, add new entry to progress table
     $addedExerciseQuery = "SELECT id FROM exercises WHERE name = '$newName'";
     $newExerciseID = $conndb->query($addedExerciseQuery);
     $id = $newExerciseID->fetch_assoc();
     date_default_timezone_set('America/Boise');
     $todaysDate = date("Y-m-d");
-     
+
     $progressQuery = "INSERT INTO `progress` (`date`, `exercise_id`, `weight`, `first_entry`, `personal_best`) "
             . "VALUES ('$todaysDate', {$id['id']} ,$weight,1,1);";
-    
+
     $progressResponse = $conndb->query($progressQuery);
-    
+
     sqlErrorCheck($progressResponse);
-    
+
     header("Location:exercise.php");
 }
 ?>
@@ -73,11 +72,11 @@ if (isset($_POST['newName']) && $_POST['newName'] != "") {
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script>
             /**
-            * Check our lists of existing exercises.  If the exercise name the user picks
-            * already exists then display an error and prevent them from adding it.  
-            * If the name does not exist add the new exercise.
-            * @returns {undefined}
-            */
+             * Check our lists of existing exercises.  If the exercise name the user picks
+             * already exists then display an error and prevent them from adding it.  
+             * If the name does not exist add the new exercise.
+             * @returns {undefined}
+             */
             function checkIfExists()
             {
                 let proposedName = document.getElementById("newName").value;
@@ -92,9 +91,20 @@ if (isset($_POST['newName']) && $_POST['newName'] != "") {
 
                 if (nameExists === false)
                 {
-                    //post it
-                    form = document.forms[0]; //assuming only form.
-                    form.submit();
+
+                    if (checkFilledOut())
+                    {
+                        //post it
+                        form = document.forms[0]; //assuming only form.
+                        form.submit();
+                    }
+                    else
+                    {
+                        //show an error
+                        document.getElementById("errorMessage").innerText = "All fields must be filled out.  Enter 0 for values that should be none";
+                        document.getElementById("errorMessage").className = "text-danger";
+                    }
+
                 }
                 else
                 {
@@ -104,6 +114,22 @@ if (isset($_POST['newName']) && $_POST['newName'] != "") {
                     console.log("printed error");
                 }
 
+            }
+
+            //check that all the other fields are filled out
+            function checkFilledOut()
+            {
+                let sets = document.getElementById("sets").value;
+                let reps = document.getElementById("reps").value;
+                let weight = document.getElementById("weight").value;
+                let muscleGroup = document.getElementById("muscleGroup").value;
+                let name = document.getElementById("newName").value;
+
+                if (sets === "" || reps === "" || muscleGroup === "" || weight === "" || name === "")
+                {
+                    return false;
+                }
+                return true;
             }
         </script>
     </head>
