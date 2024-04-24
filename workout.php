@@ -41,7 +41,7 @@ while ($myWorkouts = $result->fetch_assoc()) {
 }
 $json = json_encode($existingWorkouts);
 echo "<script> let existingWorkouts = $json; </script>";
-echo"<script> console.log(existingWorkouts);</script>";
+//echo"<script> console.log(existingWorkouts);</script>";
 
 //get all of the exercises so that the user can select one
 $query = "SELECT name, id FROM exercises order by name;";
@@ -135,18 +135,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['workout_name']) && $_P
 
                     if (nameExists === false)
                     {
-                        //post it
+                        let allFieldsEntered = verifyAllFieldsEntered();
+              
+                        if(allFieldsEntered)
+                        {
+                             //post it
                         form = document.forms[0]; //assuming only form.
                         form.submit();
+                        }
+                        else{
+                        document.getElementById("errorMessage").innerText = "You must make a selection in all fields";
+                        document.getElementById("errorMessage").className = "text-danger";
+                  
+                        }
+                       
                     }
                     else
                     {
                         //show an error
-                        document.getElementById("errorMessage").innerText = "That exercise name already exists";
+                        document.getElementById("errorMessage").innerText = "That workout name already exists";
                         document.getElementById("errorMessage").className = "text-danger";
-                        console.log("printed error");
                     }
 
+                }
+                
+                function verifyAllFieldsEntered()
+                {
+                    let muscleGroup = document.getElementById("muscle_group").value;
+                    let days = document.getElementById("days_of_the_week").value;
+                    let difficulty = document.getElementById("difficulty").value;
+                    let exercises = document.getElementById("exercises").value;
+                    
+                    if(muscleGroup === "" || days === "" || difficulty === "" || exercises === "")
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
 
             </script>

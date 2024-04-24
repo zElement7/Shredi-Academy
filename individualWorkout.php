@@ -39,7 +39,31 @@ if (mysqli_num_rows($result) > 0) {
 
 
 } else {
-    echo "Workout Not Found During Search ";
+    $sqlQuery = "Select name as workoutName, difficulty_level as difficultyLevel, day_of_the_week as dayOfWeek,"
+            . "muscle_group as muscleGroup from workouts WHERE id = {$workoutId};";
+            
+       $result = $conndb->query($sqlQuery);   
+      
+       if (mysqli_num_rows($result) > 0) {
+            while( $allInformation = $result->fetch_assoc())
+    {
+        $workoutDays = $allInformation['dayOfWeek'];
+        $workoutName = $allInformation['workoutName'];
+        $workoutDifficulty = $allInformation['difficultyLevel'];
+        $workoutMuscleGroup = $allInformation['muscleGroup'];
+     
+    }
+       }
+       else
+       {
+         $workoutDays = "";
+        $workoutName = "Unknown Workout";
+        $workoutDifficulty = "";
+        $workoutMuscleGroup = "";
+        
+        
+       }
+      
 }
                    
 
