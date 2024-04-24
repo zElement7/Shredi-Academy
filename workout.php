@@ -193,6 +193,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['workout_name']) && $_P
                         <option value="Legs">Legs</option>
                         <option value="Shoulders">Shoulders</option>
                         <option value="Arms">Arms</option>
+                         <option value="Full Body">Full Body</option>
                         <!-- Add more options as needed -->
                     </select>
                     <br>

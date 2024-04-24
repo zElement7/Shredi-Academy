@@ -118,6 +118,11 @@ if ($group == 'Chest') {
                                 echo "selected='selected'";
                             }
                     ?> >Arms</option>
+                    <option value="Full Body"<?php
+                            if ($group == 'Full Body') {
+                                echo "selected='selected'";
+                            }
+                    ?> >Full Body</option>
                     <!-- Add more options as needed -->
                 </select>
                 <br>
