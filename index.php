@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once('includes/functions.php');
     
     // check if login button has been pressed

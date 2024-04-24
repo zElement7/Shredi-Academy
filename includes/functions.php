@@ -1,7 +1,4 @@
 <?php
-    // start session for all pages that include this file
-    session_start();
-    
     /* Instantiate Global Variables */
     $homeMessage = "Welcome"; // default home message
     $currentDay = date('l'); // stores the current day of the week
@@ -10,20 +7,22 @@
     $accountCreated = $passwordsMatch = $uniqueUsername = false;
     /* -------------------------------------------- */
     
-    // secures inputs from user
-    function cleanInputValue($con, $string)
-    {
-        $string = stripslashes($string);
-        $string = htmlentities($string);
-        
-        return $con->real_escape_string($string);
-    }
+    /* CURRENTLY LOCATED IN DataBaseConnection.php
+        // secures inputs from user
+        function cleanInputValue($con, $string)
+        {
+            $string = stripslashes($string);
+            $string = htmlentities($string);
+            
+            return $con->real_escape_string($string);
+        }
+    */
     
     // adds a new custom exercise to the table in the database with specified values for each column
     function addExercise($n, $s, $r, $w, $mg, $dl)
     {
         $connect = connectToDB();
-        $sql = "INSERT INTO exercises (name, reps, sets, weight, muscle_group, difficulty_level, custom) VALUES ('$n', '$r', '$s', '$w', '$mg', '$dl', 1);";
+        $sql = "INSERT INTO exercises (name, reps, sets, weight, exercise_type, difficulty_level, custom_exercise) VALUES ('$n', '$r', '$s', '$w', '$mg', '$dl', 1);";
         mysqli_query($connect, $sql);
         
         return mysqli_close($connect);
@@ -95,32 +94,6 @@
         return $output;
     }
     
-    // gets individual workout name from the id in the database
-    function getWorkoutName($id)
-    {
-        $connect = connectToDB();
-        $sql = "SELECT name FROM workouts WHERE id='$id' LIMIT 1;";
-        $result = mysqli_query($connect, $sql);
-        
-        $row = mysqli_fetch_assoc($result);
-        
-        mysqli_close($connect);
-        return $row['name'];
-    }
-    
-    // gets individual exercise name from the id in the database
-    function getExerciseName($id)
-    {
-        $connect = connectToDB();
-        $sql = "SELECT name FROM exercises WHERE id='$id' LIMIT 1;";
-        $result = mysqli_query($connect, $sql);
-        
-        $row = mysqli_fetch_assoc($result);
-        
-        mysqli_close($connect);
-        return $row['name'];
-    }
-    
     // displays all exercises in the table ordered by the muscle group from most to least in a category
     function viewExercisesMuscleGroup()
     {
@@ -183,6 +156,7 @@
         }
     }
     
+    // updates the user profile and returns a message saying success or error
     function updateUserProfile($u, $a, $h, $g, $w)
     {
         $connect = connectToDB();
@@ -249,6 +223,38 @@
         
         mysqli_close($connect);
         return $uniqueUsername;
+    }
+    
+    // checks if a page is the currently active page
+    function isCurrentPage($pageName)
+    {
+        return (baseName($_SERVER['PHP_SELF']) == $pageName);
+    }
+    
+    // gets individual workout name from the id in the database
+    function getWorkoutName($id)
+    {
+        $connect = connectToDB();
+        $sql = "SELECT name FROM workouts WHERE id='$id' LIMIT 1;";
+        $result = mysqli_query($connect, $sql);
+        
+        $row = mysqli_fetch_assoc($result);
+        
+        mysqli_close($connect);
+        return $row['name'];
+    }
+    
+    // gets individual exercise name from the id in the database
+    function getExerciseName($id)
+    {
+        $connect = connectToDB();
+        $sql = "SELECT name FROM exercises WHERE id='$id' LIMIT 1;";
+        $result = mysqli_query($connect, $sql);
+        
+        $row = mysqli_fetch_assoc($result);
+        
+        mysqli_close($connect);
+        return $row['name'];
     }
     
     // securely hashes the input value **DO NOT EDIT**

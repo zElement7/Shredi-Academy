@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once("includes/functions.php");
     
     // if the user has submitted the form for creating an account

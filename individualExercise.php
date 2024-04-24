@@ -1,28 +1,28 @@
 <?php
     session_start();
     global $conndb; // temporarily put here to resolve some issues
-require_once "./includes/DataBaseConnection.php";
-
-$returnPage = "./" . $_SESSION['lastPage'];
-
-if (isset($_POST['exerciseId'])) {
-   // $exerciseId = cleanInputValue($conndb, $_POST['exerciseId']);
-    $exerciseId = $_POST['exerciseId'];
-} else {
-    $exerciseId = "Exercise not found";
-}
-
-
-//use exercise id to select the exercise from the database
-$sqlQuery = "SELECT sets, reps, weight, name FROM exercises WHERE id = {$exerciseId}"; //not real query
-$result = $conndb->query($sqlQuery);
-
-if (mysqli_num_rows($result) > 0) {
-            list($numberOfSets, $numberOfReps, $weightLifted, $exerciseName) = mysqli_fetch_row($result);
-}
-else{
-    echo "Error Getting Exercise Information";
-}
+    require_once "./includes/DataBaseConnection.php";
+    
+    $returnPage = "./" . $_SESSION['lastPage'];
+    
+    if (isset($_POST['exerciseId'])) {
+        // $exerciseId = cleanInputValue($conndb, $_POST['exerciseId']);
+        $exerciseId = $_POST['exerciseId'];
+    } else {
+        $exerciseId = "Exercise not found";
+    }
+    
+    
+    //use exercise id to select the exercise from the database
+    $sqlQuery = "SELECT sets, reps, weight, name FROM exercises WHERE id = {$exerciseId}"; //not real query
+    $result = $conndb->query($sqlQuery);
+    
+    if (mysqli_num_rows($result) > 0) {
+        list($numberOfSets, $numberOfReps, $weightLifted, $exerciseName) = mysqli_fetch_row($result);
+    }
+    else{
+        echo "Error Getting Exercise Information";
+    }
 
 ?>
 
@@ -33,12 +33,11 @@ else{
         <link rel="stylesheet" href="./css/style.css" type="text/css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
     </head>
     <body>
-<?php
-echo <<<HTML
+        <?php
+            include_once("includes/nav.php");
+            echo <<<HTML
         <div class="editPageDiv container-fluid text-center w-100">
        <h1>{$exerciseName}</h1>
      <form method="post" action="editExercise.php">
@@ -57,8 +56,8 @@ echo <<<HTML
      </form>
         </div>
      HTML;
-     mysqli_close($conndb);
-?>
+            mysqli_close($conndb);
+        ?>
     </body>
 </html>
 

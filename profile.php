@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once('includes/functions.php');
     
     // redirect to login page if not logged in
