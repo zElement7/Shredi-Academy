@@ -1,5 +1,6 @@
 <?php
-require_once "./includes/DataBaseConnection.php";
+    session_start();
+    require_once "./includes/DataBaseConnection.php";
 //Start of Robsen's update 4/21/24		
     // Check if form is submitted to add/delete an exercise
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['workout_id']) && isset($_POST['exercise_id'])) {
@@ -179,6 +180,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['workout_name']) && $_P
             </script>
         </head>
         <body>
+            <?php include_once "./includes/nav.php"; ?>
             <div class="container-fluid text-center w-100">
                 <h2>Add Workout</h2>
 

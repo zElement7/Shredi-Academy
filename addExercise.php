@@ -1,6 +1,6 @@
 <?php
     session_start();
-require_once "./includes/DataBaseConnection.php";
+    require_once "./includes/DataBaseConnection.php";
 
     /**
      * Check if the sql response was successful and if not display
@@ -46,12 +46,12 @@ if (isset($_POST['newName']) && $_POST['newName'] != "") {
     echo "Exercise added<br>";
     
     
-      //get the id of the new exercise, add new entry to progress table
+    //get the id of the new exercise, add new entry to progress table
     $addedExerciseQuery = "SELECT id FROM exercises WHERE name = '$newName'";
     $newExerciseID = $conndb->query($addedExerciseQuery);
-     $id = $newExerciseID->fetch_assoc();
-      date_default_timezone_set('America/Boise');
-     $todaysDate = date("Y-m-d");
+    $id = $newExerciseID->fetch_assoc();
+    date_default_timezone_set('America/Boise');
+    $todaysDate = date("Y-m-d");
      
     $progressQuery = "INSERT INTO `progress` (`date`, `exercise_id`, `weight`, `first_entry`, `personal_best`) "
             . "VALUES ('$todaysDate', {$id['id']} ,$weight,1,1);";
@@ -60,8 +60,7 @@ if (isset($_POST['newName']) && $_POST['newName'] != "") {
     
     sqlErrorCheck($progressResponse);
     
-    
-     header("Location:exercise.php");
+    header("Location:exercise.php");
 }
 ?>
 <!doctype html>
@@ -72,9 +71,7 @@ if (isset($_POST['newName']) && $_POST['newName'] != "") {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
         <script>
-
             /**
             * Check our lists of existing exercises.  If the exercise name the user picks
             * already exists then display an error and prevent them from adding it.  
@@ -108,14 +105,12 @@ if (isset($_POST['newName']) && $_POST['newName'] != "") {
                 }
 
             }
-
         </script>
     </head>
     <body>
         <?php include_once "./includes/nav.php"; ?>
         <div class="container-fluid text-center w-100">
             <h1>Add Exercise</h1>
-
             <form id = "addExerciseForm" method="POST" action="">
                 <label for="newName">Name:</label>
                 <input type="text" id="newName" name="newName">
@@ -145,12 +140,9 @@ if (isset($_POST['newName']) && $_POST['newName'] != "") {
                 <button type="button" onclick="checkIfExists()">Add Exercise</button>
                 <button name = "Cancel" value="Cancel"><a href ="exercise.php">Cancel</a></button>
             </form>
-
         </div>
-
     </body>
 </html>
 <?php
 mysqli_close($conndb);
 ?>
-

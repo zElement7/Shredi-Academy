@@ -5,49 +5,8 @@
     
     // default values for whether an account has been created or not, the passwords match, and if the username is unique
     $accountCreated = $passwordsMatch = $uniqueUsername = false;
-    /* -------------------------------------------- */
     
-    /* CURRENTLY LOCATED IN DataBaseConnection.php
-        // secures inputs from user
-        function cleanInputValue($con, $string)
-        {
-            $string = stripslashes($string);
-            $string = htmlentities($string);
-            
-            return $con->real_escape_string($string);
-        }
-    */
-    
-    // adds a new custom exercise to the table in the database with specified values for each column
-    function addExercise($n, $s, $r, $w, $mg, $dl)
-    {
-        $connect = connectToDB();
-        $sql = "INSERT INTO exercises (name, reps, sets, weight, exercise_type, difficulty_level, custom_exercise) VALUES ('$n', '$r', '$s', '$w', '$mg', '$dl', 1);";
-        mysqli_query($connect, $sql);
-        
-        return mysqli_close($connect);
-    }
-    
-    // updates a selected exercise -- the column values are from where the user makes the edits on the page
-    function updateExercise($e, $r, $s, $w)
-    {
-        $connect = connectToDB();
-        $sql = "UPDATE exercises SET reps = '$r', sets='$s', weight='$w' WHERE id='$e';";
-        mysqli_query($connect, $sql);
-        
-        return mysqli_close($connect);
-    }
-    
-    // deletes a selected exercise from the database -- the id is grabbed when the user selects the exercise they want to delete
-    function deleteExercise($e)
-    {
-        $connect = connectToDB();
-        $sql = "DELETE FROM exercises WHERE id='$e';";
-        mysqli_query($connect, $sql);
-        
-        return mysqli_close($connect);
-    }
-    
+    // gets all workouts that are tied to the current day and displays them on the home page
     function getDailyWorkout()
     {
         // get the current day of the week in an index (0 for Sunday through 6 for Saturday)
@@ -75,13 +34,12 @@
         
         if (mysqli_num_rows($result) > 0)
         {
-            $output .= "Workout for today:\n";
+            $output .= "Workout(s) for today:\n";
             
             // append each workout to the output string
             while ($row = mysqli_fetch_assoc($result))
             {
-                $output .= "Exercise: {$row['exercise']}, Muscle Group: {$row['muscle_group']}, Difficulty Level: {$row['difficulty_level']}\n";
-                
+                $output .= "Workout: {$row['name']}, Muscle Group: {$row['muscle_group']}, Difficulty Level: {$row['difficulty_level']}\n";
                 $output .= "<a href='individualWorkout.php?workoutId={$row['id']}'>View Workout</a><br>";
             }
         }
@@ -92,48 +50,6 @@
         
         mysqli_close($connect);
         return $output;
-    }
-    
-    // displays all exercises in the table ordered by the muscle group from most to least in a category
-    function viewExercisesMuscleGroup()
-    {
-        $connect = connectToDB();
-        $sql = "SELECT * FROM exercises ORDER BY exercise_type DESC;";
-        $results = mysqli_query($connect, $sql);
-        
-        if(!mysqli_num_rows($results))
-        {
-            return false;
-        }
-        
-        while($exercisesArray = mysqli_fetch_array($results, MYSQLI_ASSOC))
-        {
-            $return[] = $exercisesArray['name'];
-        }
-        mysqli_close($connect);
-        
-        return $return;
-    }
-    
-    // displays all exercises in the table in alphabetical order
-    function viewExercisesAlphabetical()
-    {
-        $connect = connectToDB();
-        $sql = "SELECT * FROM exercises ORDER BY name;";
-        $results = mysqli_query($connect, $sql);
-        
-        if(!mysqli_num_rows($results))
-        {
-            return false;
-        }
-        
-        while($exercisesArray = mysqli_fetch_array($results, MYSQLI_ASSOC))
-        {
-            $return[] = $exercisesArray['name'];
-        }
-        mysqli_close($connect);
-        
-        return $return;
     }
     
     // gets the profile information of the currently logged-in user
