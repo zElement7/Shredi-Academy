@@ -2,7 +2,6 @@
 session_start();
 require_once "./includes/DataBaseConnection.php";
 
-$_SESSION['lastPage'] = "individualWorkout.php?workoutId=$workoutId";
 $wokoutName = "";
 $workoutDays = "";
 $workoutMuscleGroup = "";
@@ -11,6 +10,7 @@ $exerciseInfo = array();
 
 if (isset($_GET['workoutId'])) {
      $workoutId = cleanInputValue($conndb, $_GET['workoutId']);
+     $_SESSION['lastPage'] = "individualWorkout.php?workoutId=$workoutId";
 
 } else {
     $workoutId = "Workout not found";
@@ -57,7 +57,6 @@ if (mysqli_num_rows($result) > 0) {
 
     </head>
     <body>
-        <?php include_once "./includes/nav.php"; ?>
 <?php
        
 echo <<<HTML
@@ -105,5 +104,3 @@ mysqli_close($conndb);
 ?>
     </body>
 </html>
-
-
