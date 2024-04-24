@@ -34,13 +34,14 @@
         
         if (mysqli_num_rows($result) > 0)
         {
-            $output .= "Workout(s) for today:\n";
+            $output .= "<h2>Workout for today:</h2>\n";
             
             // append each workout to the output string
             while ($row = mysqli_fetch_assoc($result))
             {
-                $output .= "Workout: {$row['name']}, Muscle Group: {$row['muscle_group']}, Difficulty Level: {$row['difficulty_level']}\n";
-                $output .= "<a href='individualWorkout.php?workoutId={$row['id']}'>View Workout</a><br>";
+                $output .= "<div class = 'workoutHome'> Workout: {$row['name']}</div> <div class = 'workoutInfoHome'>Muscle Group: {$row['muscle_group']} </div> <div class = 'workoutInfoHome'>Difficulty Level: {$row['difficulty_level']}</div>\n";
+                
+                $output .= "<a href='individualWorkout.php?workoutId={$row['id']}'>View Workout</a><br></br>";
             }
         }
         else
