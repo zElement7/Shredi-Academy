@@ -16,8 +16,6 @@
         $workoutId = "Workout not found";
     }
     
-    
-    
     //use workout id to select the exercise from the database
     $sqlQuery = "Select e.name as exerciseName, e.id as exerciseId, e.sets as sets, e.reps as reps, e.weight as weight, "
         . "w.name as workoutName, w.difficulty_level as difficultyLevel, "
@@ -36,25 +34,19 @@
             array_push($exerciseInfo, array($allInformation['exerciseName'], $allInformation['exerciseId'], $allInformation['sets'],
                 $allInformation['reps'], $allInformation['weight'] ));
         }
-        
-        
     } else {
         echo "Workout Not Found During Search ";
     }
-
-
 ?>
 
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Exercises</title>
+        <title>View Workout</title>
         <link rel="stylesheet" href="./css/style.css" type="text/css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
-    
     </head>
     <body>
         <?php
@@ -66,16 +58,11 @@
         <form method = "post" action = "editWorkout.php">
         <button id="editWorkoutBox" type = "submit" name="workoutToEdit" value = '{$workoutId}'>Edit Workout</button>
         </form>
-
-         </br>
+        </br>
         <h3>Days of Week : {$workoutDays}</h3>
         <h3>Muscle Group : {$workoutMuscleGroup}</h3>
         <h3>Difficulty Level : {$workoutDifficulty}</h3>
-        
-        
      HTML;
-            
-            
             for($n = 0; $n < sizeof($exerciseInfo); $n++)
             {
                 echo <<< HTML
@@ -94,12 +81,6 @@
                             </div>
       HTML;
             }
-            
-            
-            
-            
-            
-            
             mysqli_close($conndb);
         ?>
     </body>

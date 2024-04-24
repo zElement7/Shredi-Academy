@@ -93,7 +93,3 @@ if ($sqlResult == false) {
 
 mysqli_close($conndb);
 header("Location:" . $returnPage); //redirect to exercise page
-
-
-
-

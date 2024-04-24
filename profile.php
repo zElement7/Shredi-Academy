@@ -45,7 +45,7 @@
         <?php include_once("includes/nav.php") ?>
         <h1>Profile Page</h1>
         <div class="contentWrapper">
-            <h1>User Profile</h1>
+            <h1>Profile</h1>
             <?php
                 if (isset($successMessage)) echo "<p>" . $updateMessage . "</p>";
                 if (isset($errorMessage)) echo "<p>" . $errorMessage . "</p>";

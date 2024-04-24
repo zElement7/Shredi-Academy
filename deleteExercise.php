@@ -1,10 +1,9 @@
 <?php
-
 require_once "./includes/DataBaseConnection.php";
 
 $toDelete = cleanInputValue($conndb, $_POST['toDelete']);
 
-echo "to delete " . $toDelete;
+echo "To delete " . $toDelete;
 
 $deleteQuery = "Delete FROM exercises WHERE id=$toDelete";
 $success = $conndb->query($deleteQuery);
@@ -23,6 +22,3 @@ $success = $conndb->query($deleteQuery);
     
 mysqli_close($conndb);
 header('Location:./exercise.php'); //redirect to exercise page
-
-
-

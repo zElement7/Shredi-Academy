@@ -27,7 +27,6 @@ if ($sortByName == "yes") {
    // $query = "SELECT name, id, exercise_type FROM exercises order by custom_exercise, name";
 }
 
-
 $result = $conndb->query($query);
 
 if (!$result) {
@@ -36,13 +35,11 @@ if (!$result) {
     die('Invalid query: ' . mysql_error($conndb));
 }
 
-
 ?>
 <!doctype html>
 <html lang="en">
     <head>
         <title>Exercises</title>
-        
         <link rel="stylesheet" href="./css/style.css" type="text/css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -67,12 +64,11 @@ if (!$result) {
                 <a style="text-decoration: none;" href ="addExercise.php">
                     <div id="addExerciseBox">Add Exercise</div>
                 </a>
-          
                 <?php
                 if ($result->num_rows <= 0) {
-                    echo "no results";
+                    echo "No results";
                 }
-// output data of each row
+                // output data of each row
                 while ($myExercises = $result->fetch_assoc()) {
              
                     //if this is a custom exercise allow the user to delete it by adding a clickable trashcan
@@ -152,8 +148,6 @@ if (!$result) {
                 }
                 mysqli_close($conndb);
                 ?>
-
             </div>
-           
     </body>
 </html>
