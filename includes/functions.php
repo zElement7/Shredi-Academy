@@ -39,9 +39,9 @@
             // append each workout to the output string
             while ($row = mysqli_fetch_assoc($result))
             {
-                $output .= "<div class = 'workoutHome'> Workout: {$row['name']}</div> <div class = 'workoutInfoHome'>Muscle Group: {$row['muscle_group']} </div> <div class = 'workoutInfoHome'>Difficulty Level: {$row['difficulty_level']}</div>\n";
+                $output .= "<div class = 'workoutGroup'><div class = 'workoutHome'> Workout: {$row['name']}</div> <div class = 'workoutInfoHome'>Muscle Group: {$row['muscle_group']} </div> <div class = 'workoutInfoHome'>Difficulty Level: {$row['difficulty_level']}</div>\n";
                 
-                $output .= "<a href='individualWorkout.php?workoutId={$row['id']}'>View Workout</a><br></br>";
+                $output .= "<a href='individualWorkout.php?workoutId={$row['id']}'>View Workout</a><br></br></div>";
             }
         }
         else
