@@ -4,7 +4,7 @@
 <nav>
     <ul>
         <?php
-        $_SESSION['granted'] = true;
+        
             // index.php appears as "Home" when logged in and appears as "Log In" when not logged in
             echo ($_SESSION['granted'] ? '<li'.(isCurrentPage('index.php') ? ' class="active"' : '').'><a href=".">Home</li>' : '<li'.(isCurrentPage('index.php') ? ' class="active"' : '').'><a href=".">Log In</a></li>');
             
