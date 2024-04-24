@@ -46,7 +46,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['muscle_group'])) {
     $muscle_group = cleanInputValue($conndb, $_POST["muscle_group"]);
     $workoutId = cleanInputValue($conndb, $_POST['workoutToEdit']);
     $daysOfWeek = $_POST["days_of_the_week"];
-    $difficulty = cleanInputValue($conndb, $_POST["difficulty"]);
+    if(!isset($_POST["difficulty"]))
+    {
+        $difficulty = 1;
+    }
+    else
+    {
+           $difficulty = cleanInputValue($conndb, $_POST["difficulty"]);
+    }
+ 
     $exercisesToAdd = $_POST["exercises"];
 
     //need to read daysOfweek as array
