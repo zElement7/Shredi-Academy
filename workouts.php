@@ -1,6 +1,8 @@
 <?php
-session_start();
-require_once "./includes/DataBaseConnection.php";
+    session_start();
+    require_once "./includes/DataBaseConnection.php";
+    include_once('includes/functions.php');
+    loginRedirect();
 
 // Check if workout deletion is requested
 if(isset($_POST['delete_workout']) && isset($_POST['workout_id'])) {

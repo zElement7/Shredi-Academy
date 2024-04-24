@@ -1,8 +1,10 @@
 <?php
+    session_start();
+    require_once "./includes/DataBaseConnection.php";
+    include_once('includes/functions.php');
+    loginRedirect();
 
-session_start();
 $returnPage = $_SESSION['lastPage'];
-require_once "./includes/DataBaseConnection.php";
 
 if (isset($_POST['reps']) && isset($_POST['sets']) && isset($_POST['weight']) && isset($_POST['id'])) {
     if ($_POST['reps'] !== "" && $_POST['sets'] !== "" && $_POST['weight'] !== "" && $_POST['id'] !== "") {

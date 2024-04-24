@@ -1,8 +1,10 @@
 <?php
     session_start();
     require_once "./includes/DataBaseConnection.php";
-    $returnPage = $_SESSION['lastPage'];
+    include_once('includes/functions.php');
+    loginRedirect();
     
+    $returnPage = $_SESSION['lastPage'];
     $workoutId = cleanInputValue($conndb, $_GET['workoutId']);
     
     //get metadata info for the workout

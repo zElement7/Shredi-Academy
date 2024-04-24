@@ -1,6 +1,7 @@
 <?php
     session_start();
     include_once('includes/functions.php');
+    loginRedirect();
     
     // redirect to login page if not logged in
     if (!isset($_SESSION['username']))

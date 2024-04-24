@@ -6,6 +6,16 @@
     // default values for whether an account has been created or not, the passwords match, and if the username is unique
     $accountCreated = $passwordsMatch = $uniqueUsername = false;
     
+    // if the user is not logged in, redirects them back to index.php to log in. you don't need to be logged in to visit createAccount.php either
+    function loginRedirect()
+    {
+        if (!isset($_SESSION['username']))
+        {
+            header("Location: index.php");
+            exit();
+        }
+    }
+    
     // gets all workouts that are tied to the current day and displays them on the home page
     function getDailyWorkout()
     {

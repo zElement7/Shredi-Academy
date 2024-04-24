@@ -1,6 +1,8 @@
 <?php
     session_start();
+    include_once('includes/functions.php');
     require_once "./includes/DataBaseConnection.php";
+    loginRedirect();
     
     $workoutName = "";
     $workoutDays = "";

@@ -1,7 +1,10 @@
 <?php
     session_start();
     require_once "./includes/DataBaseConnection.php";
-//Start of Robsen's update 4/21/24		
+    include_once('includes/functions.php');
+    loginRedirect();
+    
+    //Start of Robsen's update 4/21/24
     // Check if form is submitted to add/delete an exercise
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['workout_id']) && isset($_POST['exercise_id'])) {
         $workout_id = sanitize_input($_POST['workout_id']);

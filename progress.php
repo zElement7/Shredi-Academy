@@ -1,6 +1,8 @@
 <?php
     session_start();
     require_once "./includes/DataBaseConnection.php";
+    include_once('includes/functions.php');
+    loginRedirect();
 
 $query = "SELECT id, name FROM exercises ORDER BY name;";
 

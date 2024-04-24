@@ -1,6 +1,8 @@
 <?php
     session_start();
-require_once "./includes/DataBaseConnection.php";
+    require_once "./includes/DataBaseConnection.php";
+    include_once('includes/functions.php');
+    loginRedirect();
 
 $_SESSION['lastPage'] = "exercise.php"; //let exercise edit redirect to wanted page
 
