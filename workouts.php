@@ -75,7 +75,7 @@ if (!$result) {
                     </form>
                     <form class="deleteForm trashForm"  action="" method="post">
                         <input type="hidden" name="workout_id" value="<?php echo $myWorkouts['id']; ?>">
-                        <button type="submit" class='glyphicon glyphicon-trash'></button>
+                        <button type="submit" name = "delete_workout" class='glyphicon glyphicon-trash'></button>
                     </form>
                 </div>
                 <?php
