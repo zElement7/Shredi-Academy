@@ -339,3 +339,8 @@ h2.homeMessage
     -webkit-text-stroke: 1px rgb(255, 0, 0);
 
 }
+
+li a:hover
+{
+    text-decoration: none;
+}
