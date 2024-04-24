@@ -136,7 +136,7 @@ nav li.active
 .editPageDiv
 {
     display:block;
-    
+
 }
 
 #progressWrapper
@@ -174,10 +174,13 @@ nav li.active
 
 #progressTimeFrame div
 {
-    padding: 25px;
+    padding: 15px;
     color: #156082;
     font-size: 2em;
+    cursor: pointer;
+    margin: 10px;
 }
+
 
 /* Zach's added styling used for account-related items */
 p.warning
@@ -263,15 +266,15 @@ p.warning
 .workoutDetails
 {
     color: white;
-  text-align: center;
-  font-size: 1.25em;
+    text-align: center;
+    font-size: 1.25em;
 }
 
 .individualWorkoutDetails
 {
     color: white;
-  text-align: center;
-  font-size: 1.25em;
+    text-align: center;
+    font-size: 1.25em;
 }
 
 .workoutBox

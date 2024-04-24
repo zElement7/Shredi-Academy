@@ -17,7 +17,7 @@ $initialWeight = "";
 $datesWithWeights = array();
 $exerciseName = "Exercise Progress";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['toShowProgressOn'] !== "Select One") {
     $exerciseToShow = cleanInputValue($conndb, $_POST['toShowProgressOn']);
 
 //    $sqlQuery = "SELECT date, weight, first_entry, personal_best FROM progress WHERE exercise_id = $exerciseToShow;";
