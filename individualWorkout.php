@@ -55,8 +55,9 @@
         <div class="contentWrapper">
         <div class="editPageDiv container-fluid text-center w-100">
         <h1>{$workoutName}</h1>
-        <form method = "post" action = "editWorkout.php?workoutId=<?php echo $workoutId; ?>">
-        <button id="editWorkoutBox" type = "submit" name="workoutToEdit" value = '{$workoutId}'>Edit Workout</button>
+        <form method="get" action="editWorkout.php">
+            <input type="hidden" name="workoutId" value="{$workoutId}">
+            <button id="editWorkoutBox" type="submit">Edit Workout</button>
         </form>
         </br>
         <h3>Days of Week : {$workoutDays}</h3>
