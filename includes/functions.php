@@ -167,7 +167,7 @@
     function getUserProfile($u)
     {
         $connect = connectToDB();
-        $sql = "SELECT * FROM users WHERE username='$u';";
+        $sql = "SELECT * FROM user_info WHERE username='$u';";
         $result = mysqli_query($connect, $sql);
         
         if (!$result)
