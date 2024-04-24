@@ -86,7 +86,7 @@ if (!$result) {
                             </div>
                         </button>
                          </form>
-                         <form id="deleteForm" action="deleteExercise.php" method="post">
+                         <form id="deleteForm" class="trashForm" action="deleteExercise.php" method="post">
                             <input type="hidden" name="toDelete" value={$myExercises['id']}>
                             <button type="submit" class='glyphicon glyphicon-trash'></button>     
                                 </form>
@@ -122,7 +122,7 @@ if (!$result) {
                                
                         </button>
                          </form>
-                       <form id="deleteForm" action="deleteExercise.php" method="post">
+                       <form id="deleteForm" class="trashForm" action="deleteExercise.php" method="post">
                             <input type="hidden" name="toDelete" value={$myExercises['id']}>
                             <button type="submit" class='glyphicon glyphicon-trash'></button>
                             </form>

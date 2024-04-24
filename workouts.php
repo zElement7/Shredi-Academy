@@ -62,7 +62,7 @@ if (!$result) {
             while ($myWorkouts = $result->fetch_assoc()) {
                 ?>
                 <div class='exerciseDiv'>
-                    <form method="get" action="individualWorkout.php" style="width:100%;">
+                    <form method="get" action="individualWorkout.php" style="width:90%;">
                         <button class='workoutBox' type="submit" name="workoutId" value='<?php echo $myWorkouts['id']; ?>'>
                             <div id='workout<?php echo $myWorkouts['id']; ?>' class='workoutText'>
                                 <?php echo $myWorkouts['name']; ?>
@@ -73,11 +73,9 @@ if (!$result) {
                             </div>
                         </button>
                     </form>
-                    <form class="deleteForm" action="" method="post">
+                    <form class="deleteForm trashForm"  action="" method="post">
                         <input type="hidden" name="workout_id" value="<?php echo $myWorkouts['id']; ?>">
-                        <button type="submit" class="btn btn-danger btn-sm" name="delete_workout">
-                            <span class="glyphicon glyphicon-trash"></span> Delete
-                        </button>
+                        <button type="submit" class='glyphicon glyphicon-trash'></button>
                     </form>
                 </div>
                 <?php

@@ -70,12 +70,12 @@
             {
                 echo <<< HTML
             <div class='exerciseDiv'>
-             <form method="post" action="individualExercise.php" style="width:100%;">
+             <form method="post" action="individualExercise.php" style="width:90%;">
              <button class='exerciseBox' type="submit" name="exerciseId" value='{$exerciseInfo[$n][1]}'>
           <div id='exercise{$exerciseInfo[$n][1]}' class = 'workoutText'>{$exerciseInfo[$n][0]}</div>
               <div class="individualWorkoutDetails">Sets: {$exerciseInfo[$n][2]} Reps: {$exerciseInfo[$n][3]} Weight: {$exerciseInfo[$n][4]} lbs
                   </div></button></form>
-                             <form id="removeExercise" action="workout.php" method="post">
+                             <form id="removeExercise" class="trashForm" action="workout.php" method="post">
                             <input type="hidden" name="workout_id" value="{$workoutId}">
                             <input type="hidden" name="exercise_id" value="{$exerciseInfo[$n][1]}">
                             <input type="hidden" name="delete_exercise" value="yes">
