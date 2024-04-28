@@ -27,6 +27,20 @@
     // store profile data in an array
     $profileData = getUserProfile($username);
     
+    // if $profileData is empty, set default blank values
+    if (empty($profileData))
+    {
+        $profileData =
+            [
+                'username' => $username,
+                'age' => '',
+                'height' => '',
+                'weight' => '',
+                'gender' => ''
+            ];
+    }
+    
+    // handle errors fetching profile data
     if (!$profileData)
     {
         // handle errors
