@@ -138,8 +138,13 @@
         // hash input before plugging into query
         $p = hashInput($p);
         
+        // insert user to users table
         $connect = connectToDB();
         $sql = 'INSERT INTO users (username, password) VALUES ("'.$u.'","'. $p.'");';
+        mysqli_query($connect, $sql);
+        
+        // insert user to user_info table
+        $sql = 'INSERT INTO user_info (username) VALUES ("'.$u.'");';
         mysqli_query($connect, $sql);
         
         // no values need to be returned, so we just close the connection and function ends
